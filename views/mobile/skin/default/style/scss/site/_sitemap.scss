@@ -1,0 +1,17 @@
+
+.map_list {
+	dl {
+		padding: 1rem*0.1 1.5rem*0.1;
+		&:nth-child(2n) {background: $cfa;}
+		dt {
+			font-size: 1.4rem*0.1;font-weight: bold;
+		}
+		dd {
+			padding-top: 1rem*0.1;line-height: 2rem*0.1;@extend .cf;
+			a {
+				display:block;padding:0.2rem*0.1 1rem*0.1;border: 1px solid $cdd;margin:0 .5rem*0.1 .5rem*0.1 0;float: left;
+				background: $cff;
+			}
+		}
+	}
+}

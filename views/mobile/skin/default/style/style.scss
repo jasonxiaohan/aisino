@@ -1,0 +1,30 @@
+// 网站基调颜色
+@import "base/color";
+// Mixin 混入
+@import "base/mixin";
+// 浏览器重置
+@import "base/reset";
+// 基础样式
+@import "base/base";
+// 表单样式
+@import "base/input";
+// 文章内容基础样式
+@import "base/article";
+@import "base/font";
+// -------------------------------------
+
+@import "scss/layouts";
+@import "scss/site";
+@import "scss/ucenter";
+@import "scss/simple";
+
+
+// 登陆以及注册,找回密码等页面
+// @import "scss/header";
+// // 登陆以及注册,找回密码等页面
+// @import "scss/login";
+// // 新订货首页
+// @import "scss/shop";
+// // 新我的首页
+// @import "scss/my";
+// @import "scss/other";

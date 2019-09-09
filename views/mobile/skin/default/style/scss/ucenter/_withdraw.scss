@@ -1,0 +1,18 @@
+.withdraw_list {
+	padding:0 1.5rem*0.1;
+}
+.withdraw_box {
+	box-shadow: 0 0 0 1px #eee;margin-bottom: 1.5rem*0.1;
+	strong {font-weight: normal;color: #555;}
+	span {color: #999;}
+	.base {
+		line-height: 2.2rem*0.1;padding: .5rem*0.1;
+		time {float: right;color:#999;font-size: 1.1rem*0.1;}
+		i {padding: .5rem*0.1;line-height: 1;display: inline-block;color: #fff;font-size: 1.2rem*0.1;}
+		em {color: $yellow;font-weight: bold;}
+	}
+	.note {
+		border-top: 1px solid #eee;line-height: 1.6;padding: .5rem*0.1;
+	}
+	.btn {border-top: 1px solid #eee;}
+}

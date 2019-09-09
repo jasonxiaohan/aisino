@@ -1,0 +1,15 @@
+.home_news_list {
+	ul {}
+	li {
+		height: 3.2rem*0.1;line-height: 3.2rem*0.1;overflow: hidden;padding: 0 1.5rem*0.1;
+		&:nth-child(2n){background: $cfa;}
+		time {float: right;color: $c99;font-size: 1.1rem*0.1;}
+		a {
+			display: block;position: relative;text-indent: 1rem*0.1;
+			&:before {
+				content: "";width: .3rem*0.1;height: .3rem*0.1;border-radius: 50%;background: $cf60;
+				display: block;position: absolute;left: 0;top: 1.5rem*0.1;
+			}
+		}
+	}
+}

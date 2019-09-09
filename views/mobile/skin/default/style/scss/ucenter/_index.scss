@@ -1,0 +1,30 @@
+
+.user_main_info {
+    margin:1.5rem*0.1;
+    ol {@extend .cf;}
+    li {
+        float: left;width: 50%;margin-bottom: 1.5rem*0.1;font-size: 1.4rem*0.1;
+        em {color: $red;}
+    }
+}
+
+.user_main_nav {
+    margin: 0 1.5rem*0.1;
+    border-radius: .5rem*0.1;box-shadow: 0 0 0 1px $cdd;
+    i {color: $cf60;display: inline-block;width: 2rem*0.1;text-align: center;}
+    h3 {
+        height: 4rem*0.1;line-height: 4rem*0.1;background: $cfa;padding: 0 1rem*0.1;font-size: 1.5rem*0.1;color: $c22;
+    }
+	ul {}
+	li {
+		border-top: 1px solid $cdd;
+		a {display: block;height: 4rem*0.1;line-height: 4rem*0.1;padding: 0 1rem*0.1;font-size: 1.3rem*0.1;}
+		i {font-size: 1.5rem*0.1;margin-right: .5rem*0.1;}
+		u {float: right;display: inline-block;height: 4rem*0.1;line-height: 4rem*0.1;color: $yellow;}
+	}
+}
+
+.home_main_logout {
+	display: block;margin: 1.5rem*0.1;
+	height: 4rem*0.1;line-height: 4rem*0.1;text-align: center;border-radius: .5rem*0.1;background: $cf60;font-size: 1.5rem*0.1;color: $cff;
+}

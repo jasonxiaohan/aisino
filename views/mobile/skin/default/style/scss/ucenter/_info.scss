@@ -1,0 +1,88 @@
+.input_li {
+	padding: 1.5rem*0.1;font-size: 1.2rem*0.1;
+	ul {}
+	li {
+		position: relative;@extend .cf;margin-bottom: 2rem*0.1;
+		.link {
+			display: block;height: 3rem*0.1;line-height: 3rem*0.1;
+		}
+	}
+		.valid-msg,.invalid-msg {
+			height: 2.2rem*0.1;line-height: 2.2rem*0.1;position: absolute;right: 1rem*0.1;top: 1rem*0.1;
+			padding: 0;
+		}
+	.input_button {height: 4.2rem*0.1;display: block;border: none;position: absolute;right: 0;top: 0;padding: 0 1rem*0.1;background: $blue;color: $cff;}
+	.input_text,.input_submit,.input_select,.input_textarea,.input_file {
+		display: block;width: 100%;height: 2.2rem*0.1;line-height: 2.2rem*0.1;border-radius: 0;padding: 1rem*0.1 0;border: none;
+		&:focus {outline: none;}
+	}
+	.input_text,.input_select,.input_textarea,.input_file {
+		background: $cff;text-indent: 1rem*0.1;box-shadow: 0 0 0 1px $cdd;
+		&:focus {box-shadow: 0 0 0 1px $blue;}
+	}
+	.input_select {
+		background:url("../image/icon_godown.png") right 1rem*0.1 center no-repeat;
+		background-size:1.5rem*0.1 auto;
+		&.f3 {
+			width: 30%;float: left;
+			&:not(:last-child) {margin-right: 5%;}
+		}
+	}
+	.input_textarea {
+		height: 8rem*0.1;
+	}
+	.input_captcha {
+		width: 12rem*0.1;float: left;
+	}
+	.captchaImg {
+		float: left;width: 12rem*0.1;height: 4.2rem*0.1;display: block;margin:0 .1rem*0.1;
+	}
+	.sendMessage {
+		display: block;float: left;height: 2.2rem*0.1;line-height: 2.2rem*0.1;padding: 1rem*0.1;margin: 0 1rem*0.1;
+		box-shadow: 0 0 0 1px $cdd;background: $cfa;
+	}
+	.input_item {
+		position: absolute;height: 1rem*0.1;line-height: 1rem*0.1;background: $cff;top: -.7rem*0.1;padding: 0 1rem*0.1;left: 0.5rem*0.1;
+		color: $c99;font-size: 1.1rem*0.1;z-index: 1;
+		em {color: $red;}
+	}
+	.li_item {
+		display: block;float: left;height: 4.2rem*0.1;line-height: 4.2rem*0.1;font-size: 1.4rem*0.1;
+	}
+	.input_submit {
+		background: $blue;cursor: pointer;color: $cff
+	}
+	.input_radio {
+		display: block;float: left;
+		input {display: none;}
+		span {
+			display: block;padding: 0 1.5rem*0.1;margin: 0.5rem*0.1;background: $cee;border-radius: 0.5rem*0.1;
+			@include online(3.2rem*0.1);
+		}
+		input:checked + span {background: $blue;color: $cff;}
+		&.block {
+			float: none;margin: -0.5rem*0.1;margin-bottom: 1.5rem*0.1;
+			span {box-shadow: 0 0 0 1px #eee;}
+			input:checked + span {box-shadow: 0 0 0 1px $blue;}
+		}
+	}
+	
+}
+// 强制修改验证样式
+textarea.invalid-text,input[type="text"].invalid-text,input[type="password"].invalid-text{
+	box-shadow: 0 0 0 1px #DD0000;border: none !important;
+}
+textarea.valid-text,input.valid-text{
+	box-shadow: 0 0 0 1px #06AC87;
+	border: none !important;
+}
+span.invalid-msg,label.invalid-msg{
+	font-size: 1.2rem*0.1;text-indent: 2.5rem*0.1;background-color: #fff;
+	background-size: 1.6rem*0.1 auto !important;
+	background-position: left center !important;
+}
+span.valid-msg,label.valid-msg{
+	color:#06AC87;font-size: 1.2rem*0.1;text-indent: -9999px;width: 1.6rem*0.1;
+	background-size: 1.6rem*0.1 auto !important;
+	background-position: left center !important;
+}

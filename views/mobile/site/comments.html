@@ -1,0 +1,48 @@
+<div id="pageInfo" data-title="评论商品"></div>
+<form method="post" action="{url:/site/comment_add}">
+<input type="hidden" name="id" value="{$this->comment['id']}" />
+<!-- 评价商品 -->
+<section class="comment_goods">
+	<h3>{$this->goods['name']}{if:$this->goods['value']}【{$this->goods['value']}】{/if}</h3>
+	<div class="point_star">
+		<strong>商品评级：</strong>
+		<label>
+			<i class="fa fa-star on"></i>
+			<i class="fa fa-star on"></i>
+			<i class="fa fa-star on"></i>
+			<i class="fa fa-star on"></i>
+			<i class="fa fa-star on"></i>
+		</label>
+		<input type="hidden" name="point" value="5">
+	</div>
+	<div class="input_li">
+		<strong class="input_item">我的评价</strong>
+		<textarea name="contents" id="contents" class="input_textarea"></textarea>
+	</div>
+</section>
+<input id="goSubmit" type="submit" class="none">
+<footer id="viewport_bottom">
+	<div class="btn_bottom">
+		<label class="btn_submit" for="goSubmit">提交评价</label>
+	</div>
+</footer>
+</form>
+<script>
+$(function(){
+	// 隐藏底部导航
+	hideNav();
+	// 切换星星
+	$(".point_star").on('click', 'i', function(){
+		var t = $(this),i = t.index()+1;
+		$("input[name='point']").val(i);
+		$(".point_star i").each(function(index){
+			if (index<i) {
+				$(this).addClass('on');
+			}else{
+				$(this).removeClass('on');
+			}
+		});
+	});
+
+})
+</script>

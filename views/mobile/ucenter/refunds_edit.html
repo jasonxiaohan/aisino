@@ -1,0 +1,56 @@
+<div id="pageInfo" data-title="申请退款"></div>
+<form action="{url:/ucenter/refunds_update}" method="post" callback="checkForm();">
+	<input type="hidden" name="order_id" value="{$this->orderRow['id']}" />
+	<section class="refunds_edit">
+		<div class="base">
+			<strong>订单号：</strong>
+			<span>{$this->orderRow['order_no']}</span><br>
+		</div>
+		<div class="input_li goods">
+			<strong>选择退款商品：</strong>
+			{foreach:items=Api::run('getOrderGoodsListByGoodsid',array('#order_id#',$this->orderRow['id'])) item=$good}
+			{set:$good_info = JSON::decode($good['goods_array'])}
+			{if:$good['is_send'] != 2}
+			<label class="input_radio block">
+				<input type="checkbox" name="order_goods_id[]" value="{$good['id']}">
+				<span>{$good_info['name']}{if:$good_info['value']}{$good_info['value']}{/if} × {$good['goods_nums']}件</span>
+			</label>
+			{/if}
+			{/foreach}
+		</div>
+		<div class="input_li note">
+			<strong>备注退款理由：</strong>
+			<div>
+				<textarea name="content" id="content" class="input_textarea" pattern="required" initmsg="" alt="填写退款备注信息"></textarea>
+			</div>
+		</div>
+	</section>
+	<input id="goSubmit" type="submit" class="none">
+	<footer id="viewport_bottom">
+		<div class="btn_bottom">
+			<div class="btn_tab">
+				<label class="btn_tab_submit blue" for="goSubmit">提交退款申请</label>
+			</div>
+		</div>
+	</footer>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	// 隐藏底部导航
+	hideNav();
+})
+
+//提交表单检查
+function checkForm(){
+	if($('#content').val() == ''){
+		alert('请填写退款原因');
+		return false;
+	}
+	if($('[name="order_goods_id[]"]:checked').length == 0){
+		alert('请选择要退款的商品');
+		return false;
+	}
+	return true;
+}
+</script>

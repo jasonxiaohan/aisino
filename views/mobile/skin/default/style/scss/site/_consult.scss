@@ -1,0 +1,15 @@
+.consult_goods {
+	position: relative;top: -1.5rem*0.1;
+	img {display: block;width: 100%;}
+	a {
+		display: block;height: 4rem*0.1;padding: 0 1.5rem*0.1;
+		position: absolute;left: 0;bottom: 0;right: 0;
+		background: rgba($c00,.5);color: $cff;text-align: center;
+		font-size: 1.4rem*0.1;line-height: 4rem*0.1;overflow: hidden;
+	}
+	&:before {
+		content: "咨询商品";position: absolute;background: $red;
+		width: 20rem*0.1;height: 4rem*0.1;line-height: 4rem*0.1;text-align: center;color: $cff;font-size: 1.8rem*0.1;
+		@include xz(-45);left: -5rem*0.1;top: 2.5rem*0.1;
+	}
+}

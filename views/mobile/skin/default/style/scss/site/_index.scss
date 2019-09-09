@@ -1,0 +1,152 @@
+.home_banner {
+	position: relative;
+	.focus {
+		text-align: center;line-height: 2;
+		span {
+			display: inline-block;width:0.6rem*0.1;height:0.6rem*0.1;margin:0 0.3rem*0.1;border-radius:50%;background:#fff;line-height: 100%;
+			&.current {background:$pink}
+		}
+	}
+}
+
+.home_nav {
+	margin-top: 1.5rem*0.1;
+	ul {@extend .cf;}
+	li {
+		float: left;width: 25%;
+		&.map i {background: $yellow;}
+		&.cart i {background: $pink;}
+		&.groupon i {background: $blue;}
+		&.favorite i {background: $red;}
+		i {
+			display: block;width: 4.5rem*0.1;height: 4.5rem*0.1;margin: 0 auto .5rem*0.1;border-radius: 50%;color: $cff;
+			text-align: center;line-height: 4.5rem*0.1;font-size: 2.4rem*0.1;
+		}
+		span {display: block;text-align: center;font-size: 1.4rem*0.1;}
+	}
+}
+
+.home_title {
+	margin-top: 1.5rem*0.1;padding:0 1.5rem*0.1;font-weight: normal;font-size: 1.8rem*0.1;
+	i {color: $red;margin-right: 1rem*0.1;}
+	strong {font-weight: normal;}
+}
+
+.home_goods {
+	margin-top: 1.5rem*0.1;
+	ul {@extend .cf;}
+	li {float: left;width: 50%;background: $cff;outline: 1px solid $cdd;}
+	a {display: block;padding: 1.5rem*0.1;}
+	img {display: block;width: 15rem*0.1;height: 15rem*0.1;}
+	span {height: 3.6rem*0.1;display: block;overflow: hidden;line-height:1.8rem*0.1;margin-top: 1rem*0.1;text-align: center;}
+}
+
+.home_goods_nav {
+	ul {
+		border-radius: .5rem*0.1;margin: 1.5rem*0.1;
+		box-shadow: 0 0 0 1px $cdd;
+		li {
+			height: 4rem*0.1;line-height: 4rem*0.1;position: relative;
+			&:not(:last-child){border-bottom: 1px solid $cdd;}
+			a {text-indent: 1.5rem*0.1;font-size: 1.5rem*0.1;display: block;}
+			i {position: absolute;right: 1.5rem*0.1;top: 0;height: 4rem*0.1;display: block;line-height: 4rem*0.1;font-size: 1.4rem*0.1;color: $yellow;}
+		}
+	}
+}
+.home_slogan {
+	border-radius: .5rem*0.1;margin: 1.5rem*0.1;
+	box-shadow: 0 0 0 1px $cdd;
+	ul {}
+	li {
+		text-align: center;padding: 1rem*0.1;
+		i {font-size: 3.6rem*0.1;margin-right: 1rem*0.1;display: inline-block;vertical-align: top;}
+		p {
+			display: inline-block;
+			strong {font-size: 2rem*0.1;font-weight: normal;}
+			span {display: inline-block;margin-top: .5rem*0.1;font-size: 1.1rem*0.1;}
+		}
+	}
+}
+.home_h3,.home_more {
+	height: 4rem*0.1;line-height: 4rem*0.1;text-indent: 1.5rem*0.1;display: block;
+	font-size: 1.4rem*0.1;font-weight: normal;color: $yellow;background: #fafafa;
+}
+.home_more {text-indent: 0;text-align: center;color: #555;}
+.home_h3.more {
+	a {
+		display: block;color: $yellow;
+		position: relative;
+		&:after {
+			content: "more";
+			display: block;position: absolute;right: 1rem*0.1;top: 0;
+			color: $c99;font-size: 1.1rem*0.1;
+		}
+	}
+}
+.home_tuan_goods {
+	overflow-x: auto;margin: .15rem 0;
+	ul {
+		display: table;
+		li {display: table-cell;}
+		a {
+			display: block;width: 1.4rem;margin:1px .075rem;position: relative;
+			img {
+				display: block;width: 1.4rem;height: 1.4rem;box-shadow: 0 0 0 1px $cdd;
+			}
+			h3 {
+				position: absolute;bottom: 0;left: 0;right: 0;background: rgba($c00,.5);
+				color: $cff;font-size: .14rem;text-align: center;
+				@include online(.2rem);
+			}
+			em {
+				position: absolute;font-size: .14rem;right: 0;top: 0;background: rgba($pink,.8);color: $cff;display: block;
+				height: .14rem;padding-top: .04rem;padding-right: .04rem;padding-bottom: .04rem;
+				&:before {
+					content: "团购价:￥";font-size: .1rem;
+				}
+				&:after {
+					content: "";display: block;height: 0;width: 0;
+					position: absolute;left: -.22rem;top: 0;
+					border:.11rem solid;border-color: rgba($pink,.8) rgba($pink,.8) transparent transparent;
+				}
+			}
+		}
+	}
+}
+.home_xianshi_goods {
+	overflow-x: auto;margin: .15rem 0;
+	ul {
+		display: table;
+		li {display: table-cell;}
+		a {
+			display: block;width: 1.4rem;margin:1px .075rem;position: relative;
+			img {
+				display: block;width: 1.4rem;height: 1.4rem;box-shadow: 0 0 0 1px $cdd;
+			}
+			h3 {
+				position: absolute;bottom: 0.2rem;left: 0;right: 0;background: rgba($c00,.5);
+				color: $cff;font-size: .14rem;text-align: center;
+				@include online(.2rem);
+			}
+			em {
+				position: absolute;font-size: .1.4rem;right: 0;top: 0;background: rgba($orange,.8);color: $cff;display: block;
+				height: .1.4rem;padding-top: .04rem;padding-right: .04rem;padding-bottom: .04rem;
+				&:before {
+					content: "抢购价:￥";font-size: .1rem;
+				}
+				&:after {
+					content: "";display: block;height: 0;width: 0;
+					position: absolute;left: -.22rem;top: 0;
+					border:.11rem solid;border-color: rgba($orange,.8) rgba($orange,.8) transparent transparent;
+				}
+			}
+			time {
+				height: .2rem;line-height: .2rem;display: block;font-size: .1rem;color: $c99;
+				&:before {
+					content: "倒计时:";font-weight: bold;color: $orange;font-size: .11rem;
+				}
+				span {font-size:.11rem;color: $pink;}
+			}
+		}
+	}
+}

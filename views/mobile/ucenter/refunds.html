@@ -1,0 +1,45 @@
+{set:$queryRefundmentDocList = Api::run('getRefundmentDocList',$this->user['user_id'])}
+{set:$items = $queryRefundmentDocList->find()}
+
+<div id="pageInfo" data-title="我的退款"></div>
+{if:$items}
+<section class="refunds_list">
+	<ul>
+		{foreach:items = $items}
+		<li>
+			<i class="{if:$item['pay_status'] == 1}bg_red{elseif:$item['pay_status'] == 2}bg_green{else:}bg_blue{/if}">
+				{echo:Order_Class::refundmentText($item['pay_status'])}
+			</i>
+			<strong>订单号：</strong>
+			<em onclick="gourl('{url:/ucenter/refunds_detail/id/$item[id]}')">{$item['order_no']}</em>
+			<p>
+				<strong>我的备注：</strong>
+				{$item['content']}
+			</p>
+			{if:$item['dispose_idea']}
+				<p>
+					<strong>管理员答复：</strong>
+					{$item['dispose_idea']}
+				</p>
+			{/if}
+			{if:$item['pay_status']==0}
+			<div class="btn btn_s btn_fa" onclick="delModel({link:'{url:/ucenter/refunds_del/id/$item[id]}'})">
+				取消
+			</div>
+			{/if}
+		</li>
+		{/foreach}
+	</ul>
+</section>
+{$queryRefundmentDocList->getPageBar()}
+
+{else:}
+<section class="no_tip">您当前没有退款信息</section>
+{/if}
+<script>
+//DOM加载完毕
+$(function(){
+	// 隐藏底部导航
+	hideNav();
+})
+</script>

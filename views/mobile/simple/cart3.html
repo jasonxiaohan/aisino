@@ -1,0 +1,60 @@
+<div id="pageInfo" data-title="订单已提交" data-goback="{url:/ucenter/order}"></div>
+<section class="cart_3">
+    <table>
+		<colgroup>
+			<col width="24%" />
+			<col />
+		</colgroup>
+        <tr>
+            <td>订单编号</td>
+            <td style="word-break: break-word;">{$this->order_num}</td>
+        </tr>
+        <tr>
+            <td>订单金额</td>
+            <td>￥{$this->final_sum}</td>
+        </tr>
+        <tr>
+            <td>备货时间</td>
+            <td>{$this->stockup_time}天</td>
+        </tr>
+        <tr>
+            <td>支付方式</td>
+            <td>{$this->payment}</td>
+        </tr>
+        <tr>
+            <td>配送方式</td>
+            <td>{$this->delivery}</td>
+        </tr>
+        <tr>
+            <td>收货人名</td>
+            <td>{$accept_name}</td>
+        </tr>
+        <tr>
+            <td>联系方式</td>
+            <td>{$mobile}</td>
+        </tr>
+        <tr>
+            <td>收货时间</td>
+            <td>{$accept_time}</td>
+        </tr>
+        <tr>
+            <td>发票抬头</td>
+            <td>{$this->tax_title}</td>
+        </tr>
+    </table>
+</section>
+{if:$this->deliveryType != 1 && $this->paymentType == 1} {set:$tmpId=$this->order_id;}
+<footer id="viewport_bottom">
+	<div class="btn_bottom">
+	    <form action='{url:/block/doPay/order_id/$tmpId}' method='post'>
+	        <input type="submit" value="立即支付" class="btn_submit pink" />
+	    </form>
+	</div>
+</footer>
+{/if}
+<script>
+$(function(){
+    // 隐藏底部导航
+    hideNav();
+})
+</script>

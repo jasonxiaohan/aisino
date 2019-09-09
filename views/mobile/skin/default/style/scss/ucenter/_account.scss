@@ -1,0 +1,21 @@
+
+.my_account {
+	padding: 3rem*0.1 0;background: $blue;color: #fff;text-align: center;margin-top: -1.5rem*0.1;
+	strong {font-weight: normal;font-size: 1.2rem*0.1;display: block;}
+	em {font-size: 3rem*0.1;margin-top: 2rem*0.1;display: block;}
+}
+
+.account_list {
+	margin-top: 1.5rem*0.1;
+	ul {}
+	li {
+		padding: 1rem*0.1 1.5rem*0.1;
+		time {float: right;color: #999;font-size: 1.1rem*0.1;}
+		strong {font-weight: normal;color: #555;}
+		em {color: $yellow;}
+		p {
+			clear: both;margin-top: 1rem*0.1;padding: .5rem*0.1;background: #fafafa;color: #999;
+			line-height: 1.4;
+		}
+	}
+}

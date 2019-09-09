@@ -1,0 +1,98 @@
+<div id="pageInfo" data-title="我的积分"></div>
+<section class="us_tab">
+    <ul>
+        <li class="on">积分列表</li>
+        <li>积分兑换</li>
+    </ul>
+</section>
+<section class="uc_con">
+    <div class="uc_con_box">
+		{set:$queryPointLog = Api::run('getUcenterPointLog',$this->user['user_id'],$this->c_datetime)}
+		{set:$items = $queryPointLog->find()}
+        {if:$items}
+        <section class="integral_list">
+            {foreach:items = $items}
+            <dl>
+                <dt>
+                    <time>{echo:substr($item['datetime'],0,10)}</time>
+                    <strong>积分：</strong><em>{$item['value']}分</em>
+                </dt>
+                <dd>
+                    <strong>说明：</strong>{$item['intro']}
+                </dd>
+            </dl>
+            {/foreach}
+        </section>
+        {$queryPointLog->getPageBar()}
+        {else:}
+        <section class="no_tip">暂时没有积分记录</section>
+        {/if}
+    </div>
+    <div class="uc_con_box none">
+        <section class="integral_ex">
+            <form action='{url:/ucenter/trade_ticket}' method='post'>
+                {set:$nowtime = ITime::getDateTime();$isHasTicket = false;}
+                <ul>
+                    {foreach:items=Api::run('getTicketList',array('#nowtime#',$nowtime),20)} {set:$isHasTicket = true;}
+                    <li>
+                        <label>
+                            <input type="radio" name='ticket_id' value="{$item['id']}">
+                            <span>{$item['name']}：{$item['value']}元（需要{$item['point']}积分）</span>
+                        </label>
+                        <p>有效日期：{echo:substr($item['start_time'],0,10)}至{echo:substr($item['end_time'],0,16)}</p>
+                    </li>
+                    {/foreach}
+                </ul>
+		        {if:$isHasTicket}
+				<input id="goSubmit" type="submit" class="none">
+				<footer id="viewport_bottom">
+					<div class="btn_bottom none">
+						<div class="btn_tab">
+							<label class="btn_tab_submit blue" for="goSubmit">兑换代金券</label>
+						</div>
+					</div>
+				</footer>
+		        {/if}
+            </form>
+        </section>
+
+        {if:!$isHasTicket}
+        <section class="no_tip">暂时没有可以兑换的代金券</section>
+        {/if}
+    </div>
+</section>
+
+<script>
+$(function(){
+    // 隐藏底部导航
+    hideNav();
+    // 简易选项卡切换JS
+    var $tab = $(".us_tab");
+    var $con = $(".uc_con"),
+        $conBox = $con.children('.uc_con_box');
+    $tab.on('click', 'li',function(){
+        var t = $(this),i = t.index();
+        t.addClass('on').siblings('li').removeClass('on');
+        $conBox.eq(i).removeClass('none').siblings('.uc_con_box').addClass('none');
+		if (i === 0) {
+			$('.btn_bottom').addClass('none');
+		} else {
+			$('.btn_bottom').removeClass('none');
+		}
+    });
+    // 积分列表百叶窗
+    var $list = $(".integral_list");
+    $list.on('click', 'dl',function(){
+        var t = $(this);
+        t.children('dd').stop().slideDown();
+        t.siblings('dl').children('dd').stop().slideUp();
+    });
+    // 兑换积分百叶窗
+    var $exList = $(".integral_ex");
+    $exList.on('click', 'li',function(){
+        var t = $(this);
+        t.children('p').stop().slideDown(100);
+        t.siblings('li').children('p').stop().slideUp(100);
+    });
+})
+</script>

@@ -1,0 +1,66 @@
+
+.group_list {
+	padding: 2rem*0.1;
+	ul {}
+	li {
+		padding: 1.5rem*0.1 0;
+		a {display: block;position: relative;padding-left: 11rem*0.1;height: 10rem*0.1;}
+		.nobuy {
+			.key {background: $c99;}
+			.name {background: rgba($c99,.8);}
+			.photo img {box-shadow: 0 0 0 1px rgba($c99,.5);@include gray;}
+			.price,.sale,.old_price {color:rgba($c99,.8);}
+			&:after {
+				content: "卖完啦!";display: block;position: absolute;top: 2.4rem*0.1;left: 11rem*0.1;text-align: center;
+				font-size: 4rem*0.1;color: $c99;
+			}
+		}
+		.photo {
+			position: absolute;left: 0;top:0;
+			img {
+				display: block;box-shadow: 0 0 0 1px rgba($yellow,.5);
+				width: 10rem*0.1;height: 10rem*0.1;border-radius: 0 1rem*0.1;
+				&.goods_photo {margin-top: 0 !important;}
+			}
+		}
+		.key {
+			width: 2.4rem*0.1;height: 2.4rem*0.1;border-radius:50%;background: darken($yellow,5%);text-align: center;line-height: 2.4rem*0.1;
+			display: block;left: -1.2rem*0.1;top: -1.2rem*0.1;position: absolute;z-index: 1;color: $cff;
+			box-shadow: 0 0 0 1px rgba($cff,.5);
+		}
+		.name {
+			position: absolute;display: block;left: .7rem*0.1;top: -.9rem*0.1;z-index: 1;text-align: center;
+			background: $yellow;padding: 0 1rem*0.1;color: $cff;font-size: 1.1rem*0.1;
+			border-radius: 0 .9rem*0.1 .9rem*0.1 0;max-width: 30%;
+			@include online(.18rem);
+		}
+		.countdown {
+			font-size: 1.6rem*0.1;text-align: center;line-height: 3rem*0.1;
+			background:rgba($yellow,.1);color: $yellow;border-radius: .5rem*0.1;
+			border: 1px dotted rgba($yellow,.5);
+		}
+		.count,.max_count  {
+			color: $c99;margin: .5rem*0.1 0;display: inline-block;
+			em {font-size: 1.5rem*0.1;font-weight: bold;color: $yellow}
+		}
+		.old_price {
+			display: block;
+			text-decoration: line-through;color: $c99;
+			&:before {
+				content: "销售价："
+			}
+		}
+		.price {
+			display: block;position: absolute;right: 0;bottom: 0;
+			font-size: 2.4rem*0.1;color: $yellow;
+			&:before {
+				content: "团购价：";font-size: 1.2rem*0.1;
+			}
+		}
+		.sale {
+			display: block;position: absolute;left: 11rem*0.1;bottom: 0;
+			font-size: 2.4rem*0.1;color: $yellow;
+			&:after {content: "折";font-size: 1.2rem*0.1;}
+		}
+	}
+}

@@ -1,0 +1,85 @@
+
+// 商品列表页
+.goods_sort {
+	@extend .cf;
+	.sort_btn {
+		display: block;float: left;height: 4.8rem*0.1;line-height: 4.8rem*0.1;
+		width: 25%;
+		&.on {height: 4.5rem*0.1;}
+		i {padding-left: .5rem*0.1;}
+	}
+}
+
+
+.goods_sort {
+	background:$cff;
+	.sort_btn {
+		text-align: center;background:$cff;
+		font-size: 1.4rem*0.1;
+		&.on {
+			border-bottom: 0.3rem*0.1 solid $yellow;color:$yellow;
+		}
+	}
+}
+
+.goods_list {
+	background:$cff;
+	ul {
+		@extend .cf;
+		li {
+			outline: 1px solid $cdd;background:$cff;overflow: hidden;
+			float: left;position: relative;width: 50%;
+			a {display: block;padding: 1rem*0.1;}
+			.photo {
+				position: relative;padding-bottom: 100%;display: block;width: 100%;
+				img {
+					position: absolute;max-height: 100%;max-width: 100%;display: block;left: 50%;top: 50%;
+					@include yd(-50%,-50%);
+				}
+			}
+			.name {
+				height: 3.2rem*0.1;line-height: 1.6rem*0.1;font-size: 1.1rem*0.1;color: #000;overflow: hidden;margin:1rem*0.1 0;
+				strong {margin: 0 auto;display: table;font-weight: normal;}
+			}
+			.price {
+				font-size: 1.4rem*0.1;font-weight: bold;color: $red;line-height: 1;
+			}
+			.old_price {text-decoration: line-through;color: #999;font-size: 1rem*0.1;float: right;line-height: 1.4rem*0.1;}
+			.del {
+				margin:-1rem*0.1 1rem*0.1 1rem*0.1;
+				border: 1px solid #ddd;background: #fafafa;text-align: center;display: block;height: 2.8rem*0.1;line-height: 2.8rem*0.1;
+			}
+		}
+	}
+}
+
+.del_fav {
+	width: 4rem*0.1*1.6;padding: 0.8rem*0.1;text-align: center;border: 1px solid $cdd;display: block;margin: 0.8rem*0.1 auto 0;
+	border-radius: 0.3rem*0.1*1.6;text-decoration: none;
+	@extend .fzss;
+}
+
+.pages_bar {
+	text-align: center;margin-top: 1.5rem*0.1;
+	span {display: none;}
+	a {
+		display: inline-block;padding: .8rem*0.1;margin: .3rem*0.1;outline: 1px solid #eee;
+		&.current_page {
+			background: $blue;outline: 1px solid $blue;color: #fff;
+		}
+	}
+}
+
+.nothing {
+	text-align: center;color: $green;font-size: 1.4rem*0.1;
+	i {font-size: 10rem*0.1;line-height: 2;}
+	p {line-height: 1.4;}
+	.tips {
+		text-align: center;margin-top: 2rem*0.1;
+		a {
+			display: inline-block;height: 3.2rem*0.1;line-height: 3.2rem*0.1;padding: 0 1.5rem*0.1;
+			background: $blue;color: #fff;
+			&:first-child {margin-right: 1rem*0.1;}
+		}
+	}
+}

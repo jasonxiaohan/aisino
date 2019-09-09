@@ -1,0 +1,17 @@
+
+.consult_list {padding: 1.5rem*0.1;}
+.consult {
+	margin-bottom: 1.5rem*0.1;padding: 1rem*0.1;
+	outline: 1px dotted $cdd;
+	.status {float: right;display: inline-block;height: 2rem*0.1;padding: 0 1rem*0.1;line-height: 2rem*0.1;background: $blue;color: $cff;}
+	time {float: right;line-height: 2rem*0.1;color: $c99;padding:0 1rem*0.1;background: $cf0;}
+	article {
+		line-height: 1.8;
+	}
+	a {
+		height: 2.4rem*0.1;line-height: 2.4rem*0.1;overflow: hidden;display: block;color: $yellow;margin-top: .5rem*0.1;
+		&:before {
+			content: "相关商品：";color: $c99;
+		}
+	}
+}

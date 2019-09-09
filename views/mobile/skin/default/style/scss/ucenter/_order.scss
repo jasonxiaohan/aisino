@@ -1,0 +1,40 @@
+.user_list {
+    margin: 1.5rem*0.1;
+    border-radius: .5rem*0.1;box-shadow: 0 0 0 1px $cdd;
+	li {
+		border-top: 1px solid $cdd;position: relative;
+		&:first-child{border-top: none;}
+		a {display: block;height: 4rem*0.1;line-height: 4rem*0.1;padding: 0 1rem*0.1;font-size: 1.3rem*0.1;}
+		i.fa-chevron-right {
+			display:block;height: 4rem*0.1;line-height: 4rem*0.1;color: $yellow;position: absolute;right: 0;top: 0;padding-right: 1rem*0.1;z-index: -1;
+		}
+	}
+}
+
+.pages_bar {
+	text-align: center;margin: 1.5rem*0.1 0;
+	span {display: none;}
+	a {
+		display: inline-block;padding: .8rem*0.1;margin: .3rem*0.1;outline: 1px solid #eee;
+		&.current_page {
+			background: $blue;outline: 1px solid $blue;color: #fff;
+		}
+	}
+}
+
+.no_tip {
+	text-align: center;line-height: 10;font-size: 1.6rem*0.1;color: $c99;
+}
+
+.user_order_detail {
+	padding:0 1.5rem*0.1;
+}
+
+.detail_table {
+	width: 100%;margin-bottom: 1.5rem*0.1;
+	&,th,td {border: 1px solid $cdd;}
+	th,td {padding:.5rem*0.1 .8rem*0.1;line-height: 1.6;}
+	th {
+		width: 6rem*0.1;color: $c22;text-align: right;white-space: nowrap;
+	}
+}

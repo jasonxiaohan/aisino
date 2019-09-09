@@ -1,0 +1,97 @@
+
+<div id="pageInfo" data-title="我的建议"></div>
+
+
+<section class="us_tab">
+	<ul>
+		<li class="on">我的建议</li>
+		<li>发表建议</li>
+	</ul>
+</section>
+<section class="uc_con">
+	<div class="uc_con_box">
+		<section class="coupon_list">
+			<ul>
+				{set:$querySuggestionList = Api::run('getUcenterSuggestion',$this->user['user_id'])}
+				{foreach:items = $querySuggestionList->find()}
+				<li onclick='show_msg(this,{echo:JSON::encode($item)})'>
+					<time>{$item['time']}</time>
+					<i>
+						{if:$item['re_content']!=''}
+						已回复
+						{else:}
+						未回复
+						{/if}
+					</i>
+					<u><strong>{$item['title']}</strong></u>
+				</li>
+				{/foreach}
+			</ul>
+			{$querySuggestionList->getPageBar()}
+		</section>
+		<section id="show_msg" class="complain none">
+			<div class="close" onclick='$(this).parents("#show_msg").hide()'></div>
+			<h2 id="title">标题</h2>
+			<article id="content">内容</article>
+			<div id='re_info' class="re_complain">
+				<strong>管理员</strong> 于
+				<time id="re_time">回复时间</time> 回复您
+				<article id="re_content">回复内容</article>
+			</div>
+		</section>
+
+	</div>
+	<div class="uc_con_box none">
+		<form action="{url:/ucenter/complain_edit}" method="post">
+			<section class="login input_li">
+				<ul>
+					<li>
+						<input type="text" name='title' class="input_text" placeholder="建议标题" pattern='required' initmsg="" alt="标题不能为空">
+					</li>
+					<li>
+						<textarea name='content' class="input_textarea" placeholder="建议内容" pattern='required' alt=''></textarea>
+					</li>
+				</ul>
+			</section>
+			<input id="goSubmit" type="submit" class="none">
+			<footer id="viewport_bottom">
+				<div class="btn_bottom none">
+					<div class="btn_tab">
+						<label class="btn_tab_submit blue" for="goSubmit">确认提交</label>
+					</div>
+				</div>
+			</footer>
+		</form>
+	</div>
+</section>
+
+
+
+<script>
+function show_msg(_self,obj){
+	$('#show_msg').show();
+	//设置数据
+	obj.re_content ? $('#show_msg #re_info').show() : $('#show_msg #re_info').hide();
+	for(var i in obj){
+		$('#show_msg #'+i).text(obj[i]);
+	}
+}
+$(function(){
+	// 隐藏底部导航
+	hideNav();
+	// 简易选项卡切换JS
+	var $tab = $(".us_tab");
+	var $con = $(".uc_con"),
+		$conBox = $con.children('.uc_con_box');
+	$tab.on('click', 'li',function(){
+		var t = $(this),i = t.index();
+		t.addClass('on').siblings('li').removeClass('on');
+		$conBox.eq(i).removeClass('none').siblings('.uc_con_box').addClass('none');
+		if (i === 0) {
+			$('.btn_bottom').addClass('none');
+		} else {
+			$('.btn_bottom').removeClass('none');
+		}
+	});
+})
+</script>

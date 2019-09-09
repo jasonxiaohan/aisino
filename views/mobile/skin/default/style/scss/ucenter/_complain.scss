@@ -1,0 +1,40 @@
+.complain {
+	width: 27rem*0.1;position: fixed;top: 15rem*0.1;background: $cff;padding: 1.5rem*0.1;
+	left: 50%;margin-left: -15rem*0.1;box-shadow: 0 0 0 100rem*0.1 rgba($c00,.5);
+	max-height: 3rem;overflow: scroll;
+	.close {
+		position: absolute;right: 1rem*0.1;top: 1rem*0.1;width: 2rem*0.1;height: 2rem*0.1;
+		&:before,&:after {
+			content: "";width: .2rem*0.1;height: 1.5rem*0.1;background: $c99;
+			display: block;position: absolute;right: .5rem*0.1;top: 0;
+		}
+		&:before {@include xz(45);}
+		&:after {@include xz(-45);}
+	}
+	h2 {font-size: 1.4rem*0.1;color: $red;word-break: break-all;width: 2.6rem;}
+	article {
+		padding:1rem*0.1 .5rem*0.1;line-height: 1.4;color: $c99;word-break: break-all;
+		* {max-width: 100%;}
+	}
+	.re_complain {
+		padding: .5rem*0.1;border: 1px dotted $cdd;background: $cfa;
+	}
+}
+
+.star {
+	display: inline-block;width: 6rem*0.1;height: 1.2rem*0.1;vertical-align: middle;
+	background:url("../image/star.png") 0 bottom no-repeat;
+	background-size: 100% auto;
+	&:before {
+		content: "";
+		display: block;height: 1.2rem*0.1;
+		background:url("../image/star.png") 0 0 no-repeat;
+		background-size: 6rem*0.1 auto;
+	}
+	&.star_0:before {width: 0%;}
+	&.star_1:before {width: 20%;}
+	&.star_2:before {width: 40%;}
+	&.star_3:before {width: 60%;}
+	&.star_4:before {width: 80%;}
+	&.star_5:before {width: 100%;}
+}

@@ -1,0 +1,7 @@
+.other_login {
+	box-shadow: 0 0 0 1px #ddd;background: #fafafa;padding: 1rem*0.1;
+	@extend .cf;
+	h3 {font-size: 1.4rem*0.1;margin-bottom: 1rem*0.1;}
+	a {display: block;float: left;margin-right: 1rem*0.1;}
+	img {width: 2.4rem*0.1;height: 2.4rem*0.1;}
+}

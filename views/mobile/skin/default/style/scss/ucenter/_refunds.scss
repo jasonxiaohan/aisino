@@ -1,0 +1,44 @@
+.refunds_edit {
+	padding: 1.5rem*0.1;
+	strong {
+		font-weight: normal;color: #555;
+	}
+	span {color: #999;}
+	.base {
+		padding-bottom:1rem*0.1;
+	}
+	.goods,.note{
+		padding: 0;
+		div {position: relative;}
+		strong {display: block;padding-bottom: 1rem*0.1;}
+	}
+}
+
+.refunds_list {
+	ul {margin: 1.5rem*0.1;}
+	li {
+		box-shadow: 0 0 0 1px #eee;margin-bottom: 1.5rem*0.1;
+		line-height: 2.2rem*0.1;
+		strong {font-weight: normal;color: #555;}
+		span {color: #999;}
+		time {float: right;color:#999;font-size: 1.1rem*0.1;}
+		i {padding: .5rem*0.1;line-height: 1;display: inline-block;color: #fff;font-size: 1.2rem*0.1;margin: .5rem*0.1;}
+		em {color: $yellow;font-weight: bold;}
+		.btn {border-top: 1px solid #eee;}
+		p {
+			border-top: 1px solid #eee;line-height: 1.6;color: #999;padding: .5rem*0.1;
+		}
+	}
+}
+
+.refunds_detail {
+	padding: 1.5rem*0.1;
+	table {
+		th {width: 7rem*0.1;background: $cfa;text-align: right;}
+		th,td {
+			border: 1px solid $cdd;padding: .5rem*0.1;line-height: 1.6;vertical-align: top;
+		}
+	}
+	a {color: $blue;}
+	em {color: $yellow;}
+}
