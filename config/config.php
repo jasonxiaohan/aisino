@@ -12,17 +12,17 @@
     array (
       0 => 
       array (
-        'host' => 'localhost:3306',
-        'user' => 'root',
-        'passwd' => 'root',
+        'host' => '47.93.220.161:3689',
+        'user' => 'lingcai',
+        'passwd' => 'Fitk7oI-CV9#rl2Qhb#SI[6PSt2yun9l',
         'name' => 'db_aisino',
       ),
     ),
     'write' => 
     array (
-      'host' => 'localhost:3306',
-      'user' => 'root',
-      'passwd' => 'root',
+      'host' => '47.93.220.161:3689',
+      'user' => 'lingcai',
+      'passwd' => 'Fitk7oI-CV9#rl2Qhb#SI[6PSt2yun9l',
       'name' => 'db_aisino',
     ),
   ),
