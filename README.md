@@ -5,3 +5,7 @@
 - 商户登录：http://您的网站域名/index.php?controller=seller
 
 ## Getting started
+```bush
+# clone the project
+git clone https://github.com/aisino.git
+```
