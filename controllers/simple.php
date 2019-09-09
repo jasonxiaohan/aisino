@@ -49,6 +49,7 @@ class Simple extends IController
     //用户注册
     function reg_act()
     {        
+        return;
     	//调用_userInfo注册插件
     	$result = plugin::trigger("userRegAct");
     	if(is_array($result))
