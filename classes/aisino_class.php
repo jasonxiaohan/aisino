@@ -24,8 +24,34 @@ class Aisino_class
 		$key = $site_config['key'];
 		$sign = strtoupper(md5($mobile.$key));
 		$params = ["mobile" => $mobile, "sign" => $sign];
-		$result = Util::curl_message($apiUrl.'/api/point/mobile',$params);
-		return $result;		
+		try {
+			// $result = Util::curl_message($apiUrl.'/api/point/mobile',$params);
+			$client = new \GuzzleHttp\Client();				
+			$response = $client->post($apiUrl.'/api/point/mobile',['form_params' => $params]);
+			if ($response->getStatusCode() == 200) {
+				$result = json_decode($response->getBody()->getContents(), true);
+        		return $result;
+			}
+			return array();
+			/*$promise = $client->requestAsync('POST',$apiUrl.'/api/point/mobile',['form_params' => $params]);
+			$promise->then(
+	            function (ResponseInterface $res) use($pointLogObj,$point_id) {		             		            	          	
+	            	if ($res->getStatusCode() == 200) {
+	            		$result = json_decode($res->getBody()->getContents(), true);
+	            		if ($result['code'] == 0) {
+	            			return $result;
+						}
+	            	}
+	            },
+	            function (RequestException $e) {		            	
+	            	return array();
+	            }
+	        );
+	        $promise->wait();*/
+
+		} catch(Exception $e) {
+			return array();	
+		}
 	}
 
 	/**

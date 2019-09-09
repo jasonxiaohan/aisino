@@ -261,11 +261,10 @@ class _userInfo extends pluginBase
 		}								
 		$userData = plugin::trigger("checkAisinoUser",array($mobile));		
 
-		if ($userData['code'] != 0) {
+		if (!$userData || $userData['code'] != 0) {
 			die("手机号不存在");
 			return false;
-		}		
-
+		}
 
 		//用户名检查
     	if(IValidate::name($username) == false)
@@ -322,7 +321,7 @@ class _userInfo extends pluginBase
 			ISafe::clear('code'.$mobile);
 		}
 
-		$this->userLoginCallback($userArray);
+		// $this->userLoginCallback($userArray);
 
 		//通知事件用户注册完毕
 		plugin::trigger("userRegFinish",$userArray);
