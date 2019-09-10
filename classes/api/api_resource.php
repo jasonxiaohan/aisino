@@ -213,10 +213,10 @@ return array(
     'getCategoryExtendList'=>array(
         'query'=>array(
             'name'  => 'category_extend as ca',
-            'join'  => 'left join goods as go on go.id = ca.goods_id',
+            'join'  => 'left join goods as go on go.id = ca.goods_id left join cost_point as co on go.id = co.goods_id',
             'where' => 'ca.category_id in(#categroy_id#) and go.is_del = 0',
             'order' => 'go.sort asc',
-            'fields'=> 'go.id,go.name,go.img,go.sell_price,go.market_price',
+            'fields'=> 'go.id,go.name,go.img,go.sell_price,go.market_price,co.point',
             'limit' => 10,
         )
     ),

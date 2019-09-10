@@ -1,11 +1,9 @@
 <div id="pageInfo" data-title="个人中心"></div>
 <section class="user_main_info">
     <ol>
-        <li>用户名：{$this->user['username']}</li>
+        <li>用户名：{echo:Util::shieldMobile($this->user['username'])}</li>
         <li>余额：<em>￥{$user['balance']}</em></li>
         <li>积分：<em>{$user['point']}</em></li>
-        <li>代金券：<em>{$propData['prop_num']} 张</em></li>
-        <li>经验值：<em>{$user['exp']}</em></li>
     </ol>
 </section>
 <nav class="user_main_nav">

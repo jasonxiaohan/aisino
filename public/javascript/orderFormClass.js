@@ -23,6 +23,11 @@ function orderFormClass()
 	this.protectPrice = 0;//保价
 	this.ticketPrice  = 0;//优惠券
 
+	this.deliveryInit = function(defaultDeliveryId)
+	{
+		this.deliveryId = defaultDeliveryId;
+	}
+
 	/**
 	 * 算账
 	 */
@@ -206,6 +211,16 @@ function orderFormClass()
 		_self.doAccount();
 	}
 
+	/**
+	 * payment初始化
+	 */
+	this.paymentInit = function(defaultPaymentId)
+	{
+		if(defaultPaymentId > 0)
+		{
+			$('input[type="radio"][name="payment"][value="'+defaultPaymentId+'"]').trigger('click');
+		}
+	}
 	/**
 	 * delivery选中
 	 * @param int deliveryId 配送方式ID

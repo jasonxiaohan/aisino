@@ -244,8 +244,6 @@ class Util
         return json_decode($result,true);
     }
 
-
-
     /**
      * @brief 提交信息Get
      * @param string $url 提交的URL
@@ -284,5 +282,17 @@ class Util
         $output = curl_exec($curl);
         curl_close($curl);
         return $output;
+    }
+
+    /**
+     * 将手机号中间4位号码隐藏起来
+     * @param  [type] $mobile [description]
+     * @return [type]         [description]
+     */
+    public static function shieldMobile($mobile) {
+        if (empty($mobile)) {
+            return;
+        }
+        return substr($mobile, 0, 3).'****'.substr($mobile, 7, 4);
     }
 }

@@ -35,7 +35,7 @@ class Simple extends IController
 		}
 		else
 		{
-			$this->redirect('login');
+			$this->redirect('login');            
 		}
 	}
 
@@ -48,7 +48,8 @@ class Simple extends IController
 
     //用户注册
     function reg_act()
-    {        
+    {
+        $this->redirect('login');        
         return;
     	//调用_userInfo注册插件
     	$result = plugin::trigger("userRegAct");
@@ -267,19 +268,20 @@ class Simple extends IController
 		$id        = IFilter::act(IReq::get('id'),'int');
 		$type      = IFilter::act(IReq::get('type'));//goods,product
 		$buy_num   = IReq::get('num') ? IFilter::act(IReq::get('num'),'int') : 1;
-		$tourist   = IReq::get('tourist');//游客方式购物
-
+		$tourist   = IReq::get('tourist');//游客方式购物        
     	//必须为登录用户
     	if($tourist === null && $this->user['user_id'] == null)
     	{
     		if($id == 0 || $type == '')
     		{
     			$this->redirect('/simple/login?tourist&callback=/simple/cart2');
+                return;
     		}
     		else
     		{
     			$url = '/simple/login?tourist&callback=/simple/cart2/id/'.$id.'/type/'.$type.'/num/'.$buy_num;
     			$this->redirect($url);
+                return;
     		}
     	}
 
@@ -374,7 +376,8 @@ class Simple extends IController
 
 		//获取商品数据信息
     	$countSumObj = new CountSum($user_id);
-		$goodsResult = $countSumObj->cart_count($gid,$type,$num);        
+		$goodsResult = $countSumObj->cart_count($gid,$type,$num);   
+           
 		if($countSumObj->error)
 		{
 			IError::show(403,$countSumObj->error);

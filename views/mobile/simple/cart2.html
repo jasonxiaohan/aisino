@@ -154,11 +154,10 @@ $(function(){
                     <div class="info_head cart_sect_header">支付方式</div>
                     <div class="pay_box">
                         {foreach:items = Api::run('getPaymentList')}
-                        {set:$paymentPrice = CountSum::getGoodsPaymentPrice($item['id'],$this->sum);}
                         <label>
                             <input name="payment" alt="{$paymentPrice}" type="radio" value="{$item['id']}"
                             onclick='orderFormInstance.paymentSelected({$item['id']});' title="{$item['name']}" />
-                            <div class="info">{$item['name']} {$item['note']} {if:$paymentPrice}支付手续费：￥{$paymentPrice}{/if}</div>
+                            <div class="info">{$item['name']} {$item['note']}</div>
                         </label>
                         {/foreach}
                     </div>
@@ -186,15 +185,7 @@ $(function(){
                             <img src="{url:/pic/thumb/img/$item[img]/w/80/h/80}">
                             <div class="info">
                                 <h4>{$item['name']}</h4>
-                                {if:isset($item['spec_array'])}
-                                {set:$spec_array=Block::show_spec($item['spec_array']);}
-                                <div class="tip">
-                                    {foreach:items=$spec_array item=$specValue key=$specName}
-                                        <!-- {$specName}： -->
-                                        <span>{$specValue}</span>
-                                    {/foreach}
-                                </div>
-                                {/if}
+                               
                                 <div class="count">
                                     <h10 class="disnone" id="deliveryFeeBox_{$item['goods_id']}_{$item['product_id']}_{$item['count']}"></h10>
                                     <strong>数量：</strong><i>{$item['count']}</i>
@@ -213,17 +204,18 @@ $(function(){
                     <div class="count">
                         {if:$this->final_sum != $this->sum}优惠后总金额{else:}商品总金额{/if}：<strong>{$this->final_sum}</strong><br>
                         - 代金券：<strong name='ticket_value'>0</strong><br>
-                        + 税金：<strong id='tax_fee'>0</strong><br>
+                        <!-- + 税金：<strong id='tax_fee'>0</strong><br> -->
                         + 运费总计：<strong id='delivery_fee_show'>0</strong><br>
-                        + 保价：<strong id='protect_price_value'>0</strong><br>
-                        + 支付手续费：<strong id='payment_value'>0</strong>
+                        <!-- + 保价：<strong id='protect_price_value'>0</strong><br> -->
+                        <!-- + 支付手续费：<strong id='payment_value'>0</strong> -->
+                        {if:$this->spend_point > 0} + 消耗积分：<strong>{$this->spend_point}</strong>{/if}
                     </div>
-                    <div class="btn_box">
+                    <!-- <div class="btn_box">
                         <div class="btn btn_all btn_pink" onclick="orderFormInstance.ticketShow();">使用代金券</div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- 发票信息 -->
-                <div class="cart_sect cart_2_tax">
+                <!-- <div class="cart_sect cart_2_tax">
                     <div class="info_head cart_sect_header">发票信息</div>
                     <div class="tax_box">
                         <p>是否需要发票？(税金:￥{$this->goodsTax})</p>
@@ -233,15 +225,15 @@ $(function(){
                         </label>
                     </div>
                     <label id="tax_title" class="tax_title input_li" style='display:none'>
-						<select name="invoice_id" class="input_select mbb">
-							<option value="">请选择发票...</option>
-							{foreach:items=Api::run("getInvoiceListByUserId",$this->user['user_id'])}
-							<option value="{$item['id']}">{$item['company_name']}</option>
-							{/foreach}
-						</select>
-						<input class="btn" onclick="orderFormInstance.editInvoice();" value="添加发票信息" />
+                                        <select name="invoice_id" class="input_select mbb">
+                                            <option value="">请选择发票...</option>
+                                            {foreach:items=Api::run("getInvoiceListByUserId",$this->user['user_id'])}
+                                            <option value="{$item['id']}">{$item['company_name']}</option>
+                                            {/foreach}
+                                        </select>
+                                        <input class="btn" onclick="orderFormInstance.editInvoice();" value="添加发票信息" />
                     </label>
-                </div>
+                </div> -->
 				<input id="goSubmit" type="submit" class="none">
                 <!-- 发票信息 结束 -->
                 <footer id="viewport_bottom">

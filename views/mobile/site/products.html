@@ -15,6 +15,10 @@
 		<li class="goods_name">
 			{$name}
 		</li>
+		<!--活动页面-->
+		{if:isset($activeTemplate)}
+		{include:$activeTemplate}
+		{/if}
 		<!--抢购活动,引入 "_products_time"模板-->
 		{if:$promo == 'time' && isset($time)}
 		{include:_products_time}

@@ -55,6 +55,78 @@ class Block extends IController
 		echo JSON::encode($data);
 	}
 
+	//[公共方法]通过解析products,goods表中的spec_array转化为格式：key:规格名称;value:规格值
+    public static function show_spec($specJson,$param = array())
+    {
+    	$specArray = JSON::decode($specJson);
+    	$spec      = array();
+    	if($specArray)
+    	{
+    		$imgSize = isset($param['size']) ? $param['size'] : 20;
+	    	foreach($specArray as $val)
+	    	{
+	    		//goods表规格数据
+	    		if(is_array($val['value']))
+	    		{
+	    			foreach($val['value'] as $tip => $sval)
+	    			{
+	    				if(!isset($spec[$val['name']]))
+	    				{
+	    					$spec[$val['name']] = array();
+	    				}
+
+	    				list($tip,$specVal) = each($sval);
+
+			    		if($val['type'] == 1)
+			    		{
+			    			$spec[$val['name']][] = $specVal;
+			    		}
+			    		else
+			    		{
+			    			$spec[$val['name']][] = strlen($tip) >= 3 ? $tip : '<img src="'.IUrl::creatUrl($specVal).'" style="border: 1px solid #ddd;width:'.$imgSize.'px;height:'.$imgSize.'px;" title="'.$tip.'" />';
+			    		}
+	    			}
+	    			$spec[$val['name']] = join("&nbsp;&nbsp;",$spec[$val['name']]);
+	    		}
+	    		//goods表老版本格式逗号分隔符
+	    		else if(strpos($val['value'],",") && $val['value'] = explode(",",$val['value']))
+	    		{
+	    			foreach($val['value'] as $tip => $sval)
+	    			{
+	    				if(!isset($spec[$val['name']]))
+	    				{
+	    					$spec[$val['name']] = array();
+	    				}
+
+			    		if($val['type'] == 1)
+			    		{
+			    			$spec[$val['name']][] = $sval;
+			    		}
+			    		else
+			    		{
+			    			$spec[$val['name']][] = '<img src="'.IUrl::creatUrl($sval).'" style="border: 1px solid #ddd;width:'.$imgSize.'px;height:'.$imgSize.'px;" />';
+			    		}
+	    			}
+	    			$spec[$val['name']] = join("&nbsp;&nbsp;",$spec[$val['name']]);
+	    		}
+	    		//products表规格数据
+	    		else
+	    		{
+		    		if($val['type'] == 1)
+		    		{
+		    			$spec[$val['name']] = $val['value'];
+		    		}
+		    		else
+		    		{
+		    			$tip = isset($val['tip']) ? $val['tip'] : "";
+		    			$spec[$val['name']] = strlen($tip) >= 3 ? $tip : '<img src="'.IUrl::creatUrl($val['value']).'" style="border: 1px solid #ddd;width:'.$imgSize.'px;height:'.$imgSize.'px;" title="'.$tip.'" />';
+		    		}
+	    		}
+	    	}
+    	}
+    	return $spec;
+    }
+
 	/**
 	 * @brief 获得配送方式ajax
 	 */

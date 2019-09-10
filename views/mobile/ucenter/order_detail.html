@@ -14,28 +14,9 @@
 
 		<tr>
 			<th>订单状态</th>
-			<td>{echo:Order_Class::orderStatusText($orderStatus)}</td>
+			<td>{echo:Order_Class::orderStatusText(Order_Class::getOrderStatus($this->order_info))}</td>
 		</tr>
-		<tr>
-			<th>订单操作</th>
-			<td>
-				{if:in_array($orderStatus,array(1,2))}
-				<input class="btn" type="button" value="取消订单" onclick='window.location.href="{url:/ucenter/order_status/order_id/$this->order_info['order_id']/op/cancel}"' />
-				{/if}
-
-				{if:$orderStatus == 2}
-				<input class="btn" type="button" value="立即付款" onclick="window.location.href='{url:/block/doPay/order_id/$item[id]}'" />
-				{/if}
-
-				{if:in_array($orderStatus,array(11,3))}
-				<input class="btn" type="button" value="确认收货" onclick='window.location.href="{url:/ucenter/order_status/order_id/$this->order_info['order_id']/op/confirm}"' />
-				{/if}
-
-				{if:Order_Class::isRefundmentApply($this->order_info)}
-				<input class="btn" type="button" value="申请退款" onclick='window.location.href="{url:/ucenter/refunds_edit/order_id/$this->order_info['order_id']}"' />
-				{/if}
-			</td>
-		</tr>
+		
 		<tr>
 			<th>订单价格</th>
 			<td>
@@ -59,7 +40,10 @@
 				{/if}
 				{if:$item['promotions'] > 0}
 				<span class="red">-</span> 促销优惠金额：￥{$item['promotions']}
-				{/if}
+				{/if}				
+				{if:$this->order_info['spend_point'] > 0}
+	            <span class="red">-</span> 消耗积分：{$this->order_info['spend_point']} 积分
+	            {/if}
 			</td>
 		</tr>
 		<tr>

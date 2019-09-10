@@ -5,17 +5,19 @@
 		<input type="hidden" name='callback' value="{$callback}" />
 		<ul>
 			<li>
-				<input type="text" class="input_text" placeholder="请输入用户名" initmsg="验证通过" name="login_info" id="login_info" value="{echo:ICookie::get('loginName');}" pattern='required' alt='填写用户名或邮箱' />
+				<input type="text" class="input_text" placeholder="请输入手机号" initmsg="验证通过" name="login_info" id="login_info" value="{echo:ICookie::get('loginName');}" pattern='mobi' alt='请输入正确的手机号' />
 			</li>
 			<li>
-				<input type="password" class="input_text" placeholder="密码" name="password" pattern='^\S{6,32}$' alt='填写密码' />
+				<!-- <input type="password" class="input_text" placeholder="密码" name="password" pattern='^\S{6,32}$' alt='填写密码' /> -->
+				<input name="mobile_code" class="input_text w100" type="text" pattern='^\w{5,10}$' />
+				<input id="btnSendCode" class="input_button" onclick="sendMessage()" type="button" value="获取验证码">
 			</li>
 			<li>
 				<input type="submit" class="input_submit" value="立即登录">
 			</li>
 			<li>
-				<a href="{url:simple/reg}" class="link fl">快速注册</a>
-				<a href="{url:simple/find_password}" class="link fr">找回密码</a>
+				<!-- <a href="{url:simple/reg}" class="link fl">快速注册</a> -->
+				<!-- <a href="{url:simple/find_password}" class="link fr">找回密码</a> -->
 			</li>
 			{set:$items=Api::run('getOauthList')}
 			{if:$items}
@@ -66,4 +68,55 @@ function next_step(){
 		window.location.href = '{url:/simple/reg}';
 	}
 }
+
+
+
+//下一步操作
+function next_step(){
+	var step_val = $('[name="next_step"]:checked').val();
+	if(step_val == 'acount'){
+		{set:$url = plugin::trigger('getCallback')."/tourist/yes"}
+		window.location.href = '{url:$url}';
+	}
+	else if(step_val == 'reg'){
+		window.location.href = '{url:/simple/reg}';
+	}
+}
+
+
+
+var InterValObj; //timer变量，控制时间
+var count = 120; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+
+//发送短信码
+function sendMessage(){
+	var mobile   = $('[name="login_info"]').val();
+	$.post("{url:/simple/send_message_mobile}",{"mobile":mobile},function(content){
+		if(content == 'success'){
+			alert('发送成功，请查看您的手机');
+			curCount = count;
+			//设置button效果，开始计时			
+            $("#btnSendCode").attr("disabled", "true");
+            $("#btnSendCode").val(curCount + "秒");
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+		}else{
+			alert(content);
+			return;
+		}
+	});
+}
+
+function SetRemainTime() {
+  	if (curCount == 0) {                
+      window.clearInterval(InterValObj);//停止计时器
+      $("#btnSendCode").removeAttr("disabled");//启用按钮
+      $("#btnSendCode").val("发送验证码");
+  	}
+  	else {
+      curCount--;
+      $("#btnSendCode").val(curCount + "秒");
+  	}
+}
+
 </script>

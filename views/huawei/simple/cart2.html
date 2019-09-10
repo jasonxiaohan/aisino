@@ -239,22 +239,7 @@ $(function(){
 					<col width="220">
 					<col>
 					<col width="250">
-					<tr>
-						<!-- <td>
-							是否需要发票？(税金:￥{$this->goodsTax})
-							<input class="radio" onclick="orderFormInstance.doAccount();$('#tax_title').toggle();" name="taxes" type="checkbox" value="{$this->goodsTax}">
-						</td>
-						<td>
-							<label id="tax_title" class='none'>
-								<select name="invoice_id" class="input_select">
-									<option value="">请选择发票...</option>
-									{foreach:items=Api::run("getInvoiceListByUserId")}
-									<option value="{$item['id']}">{$item['company_name']}</option>
-									{/foreach}
-								</select>
-								<a href="javascript:orderFormInstance.editInvoice();">【添加】</a>
-							</label>
-						</td> -->
+					<tr>						
 						<td>
 							<div class="all_count">
 								应付总额：<em>￥<span id='final_sum'>{$this->final_sum}</span></em> 元

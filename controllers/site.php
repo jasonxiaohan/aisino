@@ -365,6 +365,7 @@ class Site extends IController
 				$goods_info['activeTemplate']     = $activeObj->productTemplate();
 			}
 		}
+		// print_r($goods_info);exit;
 
 		//获得扩展属性
 		$tb_attribute_goods = new IQuery('goods_attribute as g');

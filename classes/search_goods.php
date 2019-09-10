@@ -84,7 +84,7 @@ class search_goods
 	 */
 	public static function getOrderType()
 	{
-		return array('sale' =>'销量','cpoint' =>'评分','price'=>'价格','new'=>'最新上架');
+		return array('sale' =>'销量','cpoint' =>'评分','price'=>'积分','new'=>'最新上架');
 	}
 
 	/**
@@ -353,7 +353,7 @@ class search_goods
 			//价格
 			case "price":
 			{
-				$orderArray[] = ' go.sell_price '.$by;
+				$orderArray[] = ' co.point '.$by;
 			}
 			break;
 
