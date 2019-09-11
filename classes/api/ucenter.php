@@ -127,7 +127,7 @@ class APIUcenter
         $userid     = $userid ? IFilter::act($userid,'int') : IWeb::$app->getController()->user['user_id'];
         $page       = IReq::get('page') ? IFilter::act(IReq::get('page'),'int') : 1;
         $query      = new IQuery('point_log');
-        $query->where  = "user_id = ".$userid;
+        $query->where  = "user_id = ".$userid." and disable = 0";
         $query->page   = $page;
         $query->order  = "id desc";
         return $query;

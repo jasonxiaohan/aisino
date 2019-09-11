@@ -90,16 +90,23 @@ class Aisino_class
 				$client = new \GuzzleHttp\Client();				
 				$promise = $client->requestAsync('POST',$apiUrl.'/api/point/pushpoint',['form_params' => $params]);
 				$promise->then(
-		            function (ResponseInterface $res) use($pointLogObj,$point_id) {		             		            	          	
+		            function (ResponseInterface $res) use($pointLogObj,$pointLog) {		             		            	          	
 		            	if ($res->getStatusCode() == 200) {
 		            		$result = json_decode($res->getBody()->getContents(), true);
 		            		if ($result['code'] == 0) {
 								$pointLogObj->setData(['status' => 1]);
-								$pointLogObj->update("id=".$point_id);
+								$pointLogObj->update("id = ".$pointLog['id']);										            
+							} else {
+								$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
+								$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
+								$pointLogObj->update("id = ".$pointLog['id']);
 							}
 		            	}
 		            },
 		            function (RequestException $e) {		            	
+		            	$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
+						$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
+						$pointLogObj->update("id = ".$pointLog['id']);
 		            }
 		        );
 		        $promise->wait();
@@ -110,7 +117,67 @@ class Aisino_class
 					$poinLogObj->update("id=".$point_id);
 				}*/
 			}catch(Exception $e) {
+				$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
+				$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
+				$pointLogObj->update("id = ".$pointLog['point_id']);
 			}
 		}	
+	}
+
+	/**
+	 * 生成时间戳
+	 * @param  [type] $retry_num [description]
+	 * @return [type]            [description]
+	 */
+	public static function noticeTime($retry_num) {
+		$notice_time = [5, 15, 30, 60];
+		switch ($retry_num) {
+			case 0:
+			return strtotime("+5 minutes");
+			break;
+			case 1:
+			return strtotime("+15 minutes");
+			break;
+			case 2:
+			return strtotime("+30 minutes");
+			break;
+			case 3:
+			return strtotime("+60 minutes");
+			break;			
+			default:
+			return strtotime("+120 minutes");
+			break;
+		}
+	}
+
+	/**
+	 * @brief：计算两个时间戳之间相差的日时分秒
+	 * @param  [type] $begin_time [description]
+	 * @param  [type] $end_time   [description]
+	 * @return [type]             [description]
+	 */
+	public static function timediff($begin_time,$end_time)
+	{
+	      // if($begin_time < $end_time){
+	         $starttime = $begin_time;
+	         $endtime = $end_time;
+	      // }else{
+	      //    $starttime = $end_time;
+	      //    $endtime = $begin_time;
+	      // }
+
+	      //计算天数
+	      $timediff = $endtime-$starttime;
+	      $days = intval($timediff/86400);
+	      //计算小时数
+	      $remain = $timediff%86400;
+	      $hours = intval($remain/3600);
+	      //计算分钟数
+	      $remain = $remain%3600;
+	      $mins = intval($remain/60);
+	      //计算秒数
+	      $secs = $remain%60;
+	      $res = array("day" => $days,"hour" => $hours,"min" => $mins,"sec" => $secs);
+	      return $res;
 	}
 }

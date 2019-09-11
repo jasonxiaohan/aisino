@@ -14,7 +14,7 @@ class menuUcenter
 		"我的订单"   => "fa fa-shopping-bag",
 		"我的积分"   => "fa fa-trophy",
 		// "我的优惠券" => "fa fa-tags",
-		"售后服务"   => "fa fa-reply",
+		// "售后服务"   => "fa fa-reply",
 		"站点建议"   => "fa fa-file",
 		"商品咨询"   => "fa fa-comment",
 		"商品评价"   => "fa fa-comments",
@@ -32,12 +32,12 @@ class menuUcenter
 	public static $menu = array(
 		"交易记录" => array(
 			"/ucenter/order" => "我的订单",
-			"/ucenter/integral" => "我的积分",
+			"/ucenter/integral" => "兑换记录",
 			// "/ucenter/redpacket" => "我的优惠券",
 		),
 
 		"服务中心" => array(
-			"/ucenter/refunds" => "售后服务",
+			// "/ucenter/refunds" => "售后服务",
 			"/ucenter/complain" => "站点建议",
 			"/ucenter/consult" => "商品咨询",
 			"/ucenter/evaluation" => "商品评价",

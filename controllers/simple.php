@@ -377,7 +377,7 @@ class Simple extends IController
 		//获取商品数据信息
     	$countSumObj = new CountSum($user_id);
 		$goodsResult = $countSumObj->cart_count($gid,$type,$num);   
-           
+
 		if($countSumObj->error)
 		{
 			IError::show(403,$countSumObj->error);
@@ -880,7 +880,7 @@ class Simple extends IController
 			{
 				die("申请验证码的时间间隔过短，请稍候再试");
 			}
-			$mobile_code = rand(10000,99999);
+			$mobile_code = rand(100000,999999);
 			$findPasswordDB->setData(array(
 				'user_id' => $userRow['user_id'],
 				'hash'    => $mobile_code,

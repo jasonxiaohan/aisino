@@ -23,12 +23,6 @@
 		<div class="welcome">
 			欢迎您来到 {echo:$this->_siteConfig->name}！
 		</div>
-		<!-- <ul class="top_tool">
-			<li><a href="{url:ucenter/index}">个人中心</a></li>
-			<li><a href="{url:/simple/seller}">申请开店</a></li>
-			<li><a href="{url:/seller/index}">商家管理</a></li>
-			<li><a href="{url:/site/help_list}">使用帮助</a></li>
-		</ul> -->
 	</div>
 </div>
 <!-- 顶部工具栏 -->
@@ -55,7 +49,7 @@
 								<img id="user_ico_img" src="{url:$this->user['head_ico']}" onerror="this.src='{skin:image/user_ico.gif}'">
 							</a>
 							<div>
-								<a href="{url:/ucenter/index}">{$this->user['username']} <i class="fa fa-user-md"></i></a>
+								<a href="{url:/ucenter/index}">{$this->user['username']} </a>
 								<span>{echo:ISafe::get('last_login')}</span>
 							</div>
 						</div>
@@ -65,10 +59,8 @@
 									<span class="fl">我的订单</span>
 									<a class="fr" href="{url:/ucenter/index}">更多&gt;</a>
 								</dt>
-								<dd><a href="{url:/ucenter/integral}">我的积分</a></dd>
-								<dd><a href="{url:/ucenter/account_log}">账户余额</a></dd>
+								<dd><a href="{url:/ucenter/integral}">兑换记录</a></dd>
 								<dd><a href="{url:/ucenter/evaluation}">待评价</a></dd>
-								<dd><a href="{url:/ucenter/refunds}">退换货</a></dd>
 								<dd><a href="{url:/ucenter/consult}">商品咨询</a></dd>
 							</dl>
 						</div>
