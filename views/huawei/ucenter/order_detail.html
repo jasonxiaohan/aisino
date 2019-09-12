@@ -198,11 +198,10 @@
 			<tr>
 				<th>图片</th>
 				<th>商品名称</th>
-				<th>赠送积分</th>
 				<th>商品价格</th>
 				<th>优惠金额</th>
+				<th>积分</th>
 				<th>商品数量</th>
-				<th>小计</th>
 				<th>状态</th>
 			</tr>
 		</thead>
@@ -216,11 +215,10 @@
 					<a class="blue" href="{url:/site/products/id/$good['goods_id']}" target='_blank'>{$good_info['name']}</a>
 					{if:$good_info['value']!=''}<p>{$good_info['value']}</p>{/if}
 				</td>
-				<td>{echo:$good['point']*$good['goods_nums']}</td>
-				<td class="red2">￥{$good['goods_price']}</td>
-				<td class="red2">￥{echo:$good['goods_price']-$good['real_price']}</td>
+				<td>￥{$good['goods_price']}</td>
+				<td>￥{echo:$good['goods_price']-$good['real_price']}</td>
+				<td class="red2">{echo:$good['point']*$good['goods_nums']}</td>
 				<td>x {$good['goods_nums']}</td>
-				<td class="red2 bold">￥{echo:$good['goods_nums']*$good['real_price']}</td>
 				<td>
 					{echo:Order_Class::goodsSendStatus($good['is_send'])}
 					{if:$good['delivery_id']}

@@ -611,9 +611,9 @@ return array(
     'getOrderGoodsListByGoodsid'=>array(
         'query'=>array(
             'name'  => 'order_goods as og',
-            'join'  => 'left join goods as go on og.goods_id = go.id',
+            'join'  => 'left join goods as go on og.goods_id = go.id left join cost_point as co on co.goods_id = og.goods_id',
             'where' => 'order_id = #order_id# ',
-            'fields'=> 'og.*,go.point',
+            'fields'=> 'og.*,co.point',
         )
     ),
 
