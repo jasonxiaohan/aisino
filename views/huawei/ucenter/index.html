@@ -14,7 +14,7 @@
 		<ol class="user_baseinfo">
 			<li>总积分：<a href="{url:/ucenter/integral}"><strong>{$user['point']}</strong> 分</a></li>
 			<li>交易总数量：<a href="{url:/ucenter/order}"><strong>{$statistics['num']}</strong> 笔</a></li>
-			<li>总消费额：<strong>￥{$statistics['amount']}</strong></li>
+			<li>总消费积分：<strong>{$statistics['amount']}</strong> 积分</li>
 		</ol>
 		<!-- <ol class="user_stat">
 			<li>预存款余额：<strong>￥{$user['balance']}</strong></li>
@@ -37,7 +37,7 @@
 	<table>
 		<thead>
 			<tr>
-				<th>订单编号</th><th>下单日期</th><th>收货人</th><th>支付方式</th><th>总金额</th><th>订单状态</th>
+				<th>订单编号</th><th>下单日期</th><th>收货人</th><th>支付方式</th><th>总积分</th><th>订单状态</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,7 +47,7 @@
 			<td>{$item['create_time']}</td>
 			<td>{$item['accept_name']}</td>
 			<td>{$this->payments[$item['pay_type']]['name']}</td>
-			<td>￥{echo:($item['order_amount'])}</td>
+			<td>{echo:($item['spend_point'])}</td>
 			<td>
 				{set:$orderStatus = Order_Class::getOrderStatus($item)}
 				<b class="{if:$orderStatus >= 6}green{else:}orange{/if}">{echo:Order_Class::orderStatusText($orderStatus)}</b>

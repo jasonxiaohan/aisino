@@ -100,10 +100,10 @@ class APIUcenter
         $info = $query->find();
         $result['num'] = $info[0]['num'];
 
-        $query->fields = "sum(order_amount) as amount";
+        $query->fields = "sum(spend_point) as amount";
         $query->where  = "user_id = ".$userid." and status = 5 and if_del = 0";
         $info = $query->find();
-        $result['amount'] = $info[0]['amount'];
+        $result['amount'] = !empty($info[0]['amount'])?$info[0]['amount']:0;
 
         return $result;
     }

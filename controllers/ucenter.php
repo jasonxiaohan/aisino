@@ -10,12 +10,13 @@ class Ucenter extends IController implements userAuthorization
 
 	public function init()
 	{
-
+        $user = Api::run('getMemberInfo');
+        $this->setRenderData(["user" => $user]);
 	}
     public function index()
     {        
     	//获取用户基本信息
-		$user = Api::run('getMemberInfo');
+		// $user = Api::run('getMemberInfo');    
 
 		//获取用户各项统计数据
 		$statistics = Api::run('getMemberTongJi');
@@ -28,7 +29,7 @@ class Ucenter extends IController implements userAuthorization
 		$propData= Api::run('getPropTongJi');
 
 		$this->setRenderData(array(
-			"user"       => $user,
+			// "user"       => $user,
 			"statistics" => $statistics,
 			"msgNum"     => $msgNum,
 			"propData"   => $propData,
