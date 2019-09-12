@@ -62,7 +62,7 @@
 								<img id="user_ico_img" src="{url:$this->user['head_ico']}" onerror="this.src='{skin:image/user_ico.gif}'">
 							</a>
 							<div>
-								<a href="{url:/ucenter/index}">{echo:Util::shieldMobile($this->user['username'])} <i class="fa fa-user-md"></i></a>
+								<a href="{url:/ucenter/index}">{echo:Util::shieldMobile($this->user['username'])}</a>
 								<span>{echo:ISafe::get('last_login')}</span>
 							</div>
 						</div>
