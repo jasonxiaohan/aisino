@@ -183,12 +183,12 @@ $(function(){
 					<thead>
 						<tr>
 							<th>图片</th>
-							<th>商品名称</th>
-							<th>赠送积分</th>
+							<th>商品名称</th>							
 							<th>单价</th>
 							<th>优惠</th>
+							<th>积分</th>
 							<th>数量</th>
-							<th>小计</th>
+							<!-- <th>小计</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -206,12 +206,12 @@ $(function(){
 								{/foreach}
 								</p>
 								{/if}
-							</td>
-							<td>{$item['point']}</td>
+							</td>							
 							<td><em>￥{$item['sell_price']}</em></td>
 							<td>减￥{$item['reduce']}</td>
+							<td><em>{$item['spend_point']}</em></td>
 							<td>{$item['count']}</td>
-							<td id="deliveryFeeBox_{$item['goods_id']}_{$item['product_id']}_{$item['count']}"><em>￥{$item['sum']}</em></td>
+							<!-- <td id="deliveryFeeBox_{$item['goods_id']}_{$item['product_id']}_{$item['count']}"><em>￥{$item['sum']}</em></td> -->
 						</tr>
 						{/foreach}
 						<!-- 商品展示 结束-->

@@ -233,6 +233,7 @@ class CountSum
 	    	if($activeResult === true)
 	    	{
 	    		$typeRow  = $activeObject->originalGoodsInfo;
+	    		$typeRow['spend_point'] = $activeObject->spendPoint;
 	    		$disPrice = $activeObject->activePrice;
 
 				//设置优惠价格，如果不存在则优惠价等于商品原价

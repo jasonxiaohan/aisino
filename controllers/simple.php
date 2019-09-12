@@ -660,7 +660,7 @@ class Simple extends IController
 			/*将订单中的商品插入到order_goods表*/
 	    	$orderInstance = new Order_Class();
 	    	$orderGoodsResult = $orderInstance->insertOrderGoods($order_id,$goodsResult['goodsResult']);
-            
+
 	    	if($orderGoodsResult !== true)
 	    	{
 	    		IError::show(403,$orderGoodsResult);
