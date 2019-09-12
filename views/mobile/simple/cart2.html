@@ -102,7 +102,7 @@ $(function(){
                            {foreach:items = Api::run('getDeliveryList')}
                             <li>
                                 <label>
-                                    <input type="radio" name="delivery_id" value="{$item['id']}" paytype="{$item['type']}"
+                                    <input type="radio" name="delivery_id" checked="checked" value="{$item['id']}" paytype="{$item['type']}"
                                     onclick='orderFormInstance.deliverySelected({$item['id']});' />
                                     <div class="info">
                                         <strong id="deliveryShow{$item['id']}"></strong>
@@ -155,7 +155,7 @@ $(function(){
                     <div class="pay_box">
                         {foreach:items = Api::run('getPaymentList')}
                         <label>
-                            <input name="payment" alt="{$paymentPrice}" type="radio" value="{$item['id']}"
+                            <input name="payment" alt="{$paymentPrice}" checked="checked" type="radio" value="{$item['id']}"
                             onclick='orderFormInstance.paymentSelected({$item['id']});' title="{$item['name']}" />
                             <div class="info">{$item['name']} {$item['note']}</div>
                         </label>

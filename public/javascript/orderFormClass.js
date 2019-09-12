@@ -221,6 +221,17 @@ function orderFormClass()
 			$('input[type="radio"][name="payment"][value="'+defaultPaymentId+'"]').trigger('click');
 		}
 	}
+
+	/**
+	 * payment选择
+	 */
+	this.paymentSelected = function(paymentId)
+	{
+		var paymentObj = $('input[type="radio"][name="payment"][value="'+paymentId+'"]');
+		this.paymentPrice = paymentObj.attr("alt");
+		this.doAccount();
+	}
+
 	/**
 	 * delivery选中
 	 * @param int deliveryId 配送方式ID
@@ -255,10 +266,10 @@ function orderFormClass()
 		var addressObj  = $('input[type="radio"][name="radio_address"]:checked');
 		var takeselfObj = $('input[type="radio"][name="takeself"]:checked');
 		var deliveryObj = $('input[type="radio"][name="delivery_id"]:checked');
-		var paymentObj  = $('input[type="radio"][name="payment"]:checked');
+		var paymentObj  = $('input[type="radio"][name="payment"]:checked');				
 
         //收货地址和自提点必须选择其一
-		if($('#addressBox').is(":visible") && addressObj.length == 0)
+		if(addressObj.length == 0)
 		{
 		    if(takeselfObj && takeselfObj.length > 0)
 		    {

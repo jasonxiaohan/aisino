@@ -459,8 +459,9 @@ class Simple extends IController
     		}
 
             if(!$addressRow)
-            {
-                IError::show(403,"收货地址信息不存在");
+            {                
+                IError::show(403,"收货地址信息不存在");               
+                die("收获地址不正确");
             }
 
             $accept_name   = IFilter::act($addressRow['accept_name'],'name');
@@ -659,6 +660,7 @@ class Simple extends IController
 			/*将订单中的商品插入到order_goods表*/
 	    	$orderInstance = new Order_Class();
 	    	$orderGoodsResult = $orderInstance->insertOrderGoods($order_id,$goodsResult['goodsResult']);
+            
 	    	if($orderGoodsResult !== true)
 	    	{
 	    		IError::show(403,$orderGoodsResult);

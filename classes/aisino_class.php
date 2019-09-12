@@ -70,7 +70,7 @@ class Aisino_class
 		
 
 		$pointLogObj    = new IModel('point_log');
-		$pointLog = $pointLogObj->getObj('id = '.$point_id.' and status = 0');
+		$pointLog = $pointLogObj->getObj('id = '.$point_id.' and status = 0');		
 
 		if ($pointLog) {
 			$userObj = new IModel('user');
@@ -103,7 +103,7 @@ class Aisino_class
 							}
 		            	}
 		            },
-		            function (RequestException $e) {		            	
+		            function (RequestException $e) use($pointLogObj, $pointLog) {		            	
 		            	$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
 						$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
 						$pointLogObj->update("id = ".$pointLog['id']);
@@ -119,7 +119,7 @@ class Aisino_class
 			}catch(Exception $e) {
 				$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
 				$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
-				$pointLogObj->update("id = ".$pointLog['point_id']);
+				$pointLogObj->update("id = ".$pointLog['id']);
 			}
 		}	
 	}
