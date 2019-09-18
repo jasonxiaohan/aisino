@@ -28,7 +28,6 @@ class Simple extends IController
 
 	function login()
 	{
-        print_r(Aisino_class::pushPoint(44));exit;
 		//如果已经登录，就跳到ucenter页面
 		if($this->user)
 		{
