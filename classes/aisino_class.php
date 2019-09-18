@@ -88,7 +88,7 @@ class Aisino_class
 				return;
 			}
 			$mobile = $user['username'];
-			$data = ['mobile' => $mobile,'action' => '兑换', 'score' => $pointLog['value'],'qymc' => '爱信诺征信有限公司','source' => '信商达'];
+			$data = ['mobile' => $mobile,'action' => '兑换', 'score' => $pointLog['value'],'qymc' => '爱信诺征信有限公司','source' => 'shoppingmall'];
 			ksort($data);
 			$strTemp = Aisino_class::ToUrlParams($data);
 
