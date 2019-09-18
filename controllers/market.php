@@ -1080,14 +1080,14 @@ class Market extends IController implements adminAuthorization
 
     //[积分兑换]添加,修改
     function cost_point_edit_act()
-    {
+    {    	
         $id = IFilter::act(IReq::get('id','post'),'int');
         $goods_id = IFilter::act(IReq::get('condition','post'),'int');
         $point = IFilter::act(IReq::get('point','post'),'int');
         $is_close = IFilter::act(IReq::get('is_close'),'int');
         $user_group  = IFilter::act(IReq::get('user_group','post'));
         $user_group  = is_array($user_group) ? join(',',$user_group) : "";
-        $name  = IFilter::act(IReq::get('name','post'));
+        $name  = IFilter::act(IReq::get('name','post'));        
 
         $dataArray = array(
             'id'         => $id,

@@ -53,7 +53,7 @@ class goods_class
 	 * @param array $postData 商品所需数据,键名分为"_"前缀和非"_"前缀，非"_"前缀的是goods表的字段
 	 */
 	public function update($id,$postData)
-	{
+	{				
 		$goodsUpdateData = array();//更新到goods表的字段数据
 		$nowDataTime     = ITime::getDateTime();
 
@@ -189,6 +189,27 @@ class goods_class
 			}
 		}
 
+		// 处理积分商品
+
+		$costPointDB = new IModel('cost_point');
+		$costPointData = [];
+		$costPointData['name'] = $postData['name'];
+		$costPointData['point'] = isset($postData['_sell_price'][$defaultKey]) ? IFilter::act($postData['_sell_price'][$defaultKey],'float')   : 0;
+		$costPointData['seller_id'] = $postData['seller_id'];
+		$costPointData['goods_id'] = $id;
+		$costPointData['products_no'] = isset($postData['_goods_no'][$defaultKey])     ? IFilter::act($postData['_goods_no'][$defaultKey])             : '';
+		$costPointData['user_group'] = '';
+
+		$costPointRow = $costPointDB->getObj("goods_id = ".$id, 'id');
+		if ($costPointRow) {
+			$costPointData['products_no'] = isset($postData['_goods_no'][$defaultKey])?IFilter::act($postData['_goods_no'][$defaultKey]):'';
+			$costPointDB->setData($costPointData);
+			$costPointDB->update("id = ".$costPointRow['id']);
+		} else {
+			$costPointDB->setData($costPointData);
+			$costPointRow['id'] = $costPointDB->add();
+		}		
+
 		//商品添加成功后更新虚拟属性
 		$this->updateGoodsType($id,$postData,$isInsert);
 
@@ -210,8 +231,21 @@ class goods_class
 			}
 		}
 
+		if(isset($costPointRow['id'])) {
+			// 修改商品active_id
+			$dataArray = array(
+	            'active_id'  => $costPointRow['id'],
+	            'promo'      => 'costpoint',
+	        );
+	        $goodsDB->setData($dataArray);
+	        $goodsDB->update('id = '. $id);
+		}
+		
+
+
 		//处理货品数据信息
 		$productsDB = new IModel('products');
+		$costPointsDB = new IModel('cost_point');
 		if(isset($postData['_spec_array']))
 		{
 			//是否存在货品
@@ -227,6 +261,16 @@ class goods_class
 				}
 			}
 
+			// 是否存在积分兑换货品
+			$costPointList = $costPointsDB->query('goods_id = '.$id, 'id,products_no');
+			// 货品与积分关系
+			$relationPoint = array();
+			if ($costPointList) {
+				foreach ($costPointList as $key => $val) {
+					$relationPoint[$val['products_no']] = $val['id'];
+				}
+			}
+
 			//创建货品信息
 			$productIdArray = array();//post数据次序和ID关系
 			foreach($postData['_goods_no'] as $key => $rs)
@@ -236,7 +280,7 @@ class goods_class
 					'products_no'  => IFilter::act($postData['_goods_no'][$key]),
 					'store_nums'   => IFilter::act($postData['_store_nums'][$key],'int'),
 					'market_price' => IFilter::act($postData['_market_price'][$key],'float'),
-					'sell_price'   => IFilter::act($postData['_sell_price'][$key],'float'),
+					'sell_price'   => IFilter::act($postData['_sell_price'][$key],'int'),
 					'cost_price'   => IFilter::act($postData['_cost_price'][$key],'float'),
 					'weight'       => IFilter::act($postData['_weight'][$key],'float'),
 					'spec_array'   => "[".join(',',IFilter::act($this->specArraySort($postData['_spec_array'][$key])))."]"
@@ -249,6 +293,22 @@ class goods_class
 				}
 				$productsDB->setData($productsData,'id');
 				$productIdArray[$key] = $productsDB->replace();
+
+				// 积分
+				$costPointsData = array(
+					'name'	=> $goodsUpdateData['name'],
+					'goods_id' => $id,
+					'point'	=> IFilter::act($postData['_sell_price'][$key],'int'),
+					'seller_id' => $postData['seller_id'],
+					'products_no' => $rs
+				);
+				$costPointsData['id'] = 'NULL';
+				if (isset($relationPoint[$rs])) {
+					$costPointsData['id'] = $relationPoint[$rs];
+					unset($relationPoint[$rs]);
+				}
+				$costPointsDB->setData($costPointsData, 'id');
+				$costPointsDB->replace();
 			}
 			//清理残余的货品
 			if($relationPro)
@@ -524,10 +584,15 @@ class goods_class
 
 		//获取商品
 		$obj_goods = new IModel('goods');
-		$goods_info = $obj_goods->getObj($goodsWhere);
+		$goods_info = $obj_goods->getObj($goodsWhere);		
 		if(!$goods_info)
 		{
             return null;
+		}
+		$obj_costpoint = new IModel('cost_point');
+		$costPoint_info = $obj_costpoint->getObj("goods_id = ".$id, 'point');
+		if($costPoint_info) {
+			$goods_info['sell_price'] = $costPoint_info['point'];
 		}
 
 		//获取商品的会员价格
@@ -538,10 +603,19 @@ class goods_class
 		{
 			$temp[$val['group_id']] = $val['price'];
 		}
-		$goods_info['groupPrice'] = $temp ? JSON::encode($temp) : '';
+		$goods_info['groupPrice'] = $temp ? JSON::encode($temp) : '';		
 
 		//赋值到FORM用于渲染
 		$data = array('form' => $goods_info);
+
+		// 获取积分商品
+		$costPointDB = new IModel('cost_point');
+		$costPoint = $costPointDB->query("goods_id = ".$goods_info['id']);
+
+		$costPointProductNo = [];
+		foreach ($costPoint as $key => $val) {
+			$costPointProductNo[$val['products_no']] = $val['point'];
+		}
 
 		//获取货品
 		$productObj = new IModel('products');
@@ -558,6 +632,7 @@ class goods_class
 					$temp[$val['group_id']] = $val['price'];
 				}
 				$product_info[$k]['groupPrice'] = $temp ? JSON::encode($temp) : '';
+				$product_info[$k]['sell_price'] = isset($costPointProductNo[$rs['products_no']])?$costPointProductNo[$rs['products_no']]:0;
 			}
 			$data['product'] = $product_info;
 		}
@@ -860,6 +935,8 @@ class goods_class
 		$join  = array();
 		$where = array();
 
+		$join[] = "left join cost_point as co on co.goods_id = go.id";
+		
 		if(isset($search['type']) && isset($search['content']) && $search['content'])
 		{
 			switch($search['type'])
@@ -907,7 +984,7 @@ class goods_class
 			$category_id = IFilter::act($search['category_id'],'int');
 			$join[]  = "left join category_extend as ce on ce.goods_id = go.id";
 			$where[] = "ce.category_id = ".$category_id;
-		}
+		}		
 
 		if(isset($search['is_del']) && $search['is_del'] !== '')
 		{

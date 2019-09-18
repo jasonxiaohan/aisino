@@ -22,14 +22,19 @@ class Aisino_class
 		$site_config   = $siteConfigObj->getInfo();
 		$apiUrl = $site_config['api_url'];
 		$key = $site_config['key'];
-		$sign = strtoupper(md5($mobile.$key));
-		$params = ["mobile" => $mobile, "sign" => $sign];
+		$sign = strtoupper(md5('mobile='.$mobile.'&key='.$key));
+		$params = ["mobile" => $mobile, "sign" => $sign];		
 		try {
 			// $result = Util::curl_message($apiUrl.'/api/point/mobile',$params);
-			$client = new \GuzzleHttp\Client();				
-			$response = $client->post($apiUrl.'/api/point/mobile',['form_params' => $params]);
+			$client = new \GuzzleHttp\Client();							
+			$response = $client->request('GET', $apiUrl.'/userScore/getScore?'.http_build_query($params));
 			if ($response->getStatusCode() == 200) {
-				$result = json_decode($response->getBody()->getContents(), true);
+				$data = json_decode($response->getBody()->getContents(), true);
+				$result = [];
+				if ($data && $data['errorCode'] == 0) {
+					$result['code'] = $data['errorCode'];
+					$result['data'] = ['point' => $data['dataBody']['userScore'][0]['score']];
+				}
         		return $result;
 			}
 			return array();
@@ -79,24 +84,26 @@ class Aisino_class
 				return;
 			}
 			$mobile = $user['username'];
-			$data = ['unique' => $pointLog['unique'], 'point' => $pointLog['value'],'timestamp' => strtotime($pointLog['datetime']),'desc' => $pointLog['intro']];
-			$sign = strtoupper(md5($mobile.json_encode($data).$key));
-			$params = [
-				'mobile' => $mobile,
-				'sign'	 => $sign,
-				'data'	 => json_encode($data),			
-			];	
+			$data = ['mobile' => $mobile,'action' => '兑换', 'score' => $pointLog['value'],'qymc' => '爱信诺征信有限公司','source' => '信商达'];
+			ksort($data);
+			$strTemp = Aisino_class::ToUrlParams($data);
+
+			$sign = strtoupper(md5($strTemp.'&key='.$key));
+			$params = $data;
+			$params['sign'] = $sign;
 			try {
 				$client = new \GuzzleHttp\Client();				
-				$promise = $client->requestAsync('POST',$apiUrl.'/api/point/pushpoint',['form_params' => $params]);
+				$promise = $client->requestAsync('POST',$apiUrl.'userScore/addScoreRecord',['form_params' => $params]);
 				$promise->then(
 		            function (ResponseInterface $res) use($pointLogObj,$pointLog) {		             		            	          	
 		            	if ($res->getStatusCode() == 200) {
 		            		$result = json_decode($res->getBody()->getContents(), true);
+		            		// var_dump($result);exit;
 		            		if ($result['code'] == 0) {
 								$pointLogObj->setData(['status' => 1]);
 								$pointLogObj->update("id = ".$pointLog['id']);										            
 							} else {
+		            		// var_dump($result);exit;
 								$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
 								$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
 								$pointLogObj->update("id = ".$pointLog['id']);
@@ -180,4 +187,22 @@ class Aisino_class
 	      $res = array("day" => $days,"hour" => $hours,"min" => $mins,"sec" => $secs);
 	      return $res;
 	}
+
+	/**
+	 * 格式化参数格式化成url参数
+	 */
+	public static function ToUrlParams($values)
+	{
+		$buff = "";
+		foreach ($values as $k => $v)
+		{
+			if($k != "sign" && $v != "" && !is_array($v)){
+				$buff .= $k . "=" . $v . "&";
+			}
+		}
+		
+		$buff = trim($buff, "&");
+		return $buff;
+	}
+	
 }

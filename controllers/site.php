@@ -321,6 +321,9 @@ class Site extends IController
 		{
 			IError::show(403,"这件商品不存在");
 		}
+		if($goods_info['active_id'] == 0)  {
+			IError::show(403,"这件商品不存在");
+		}
 
 		//品牌名称
 		if($goods_info['brand_id'])

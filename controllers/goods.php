@@ -326,7 +326,7 @@ class Goods extends IController implements adminAuthorization
 		//拼接sql
 		$goodsHandle = new IQuery('goods as go');
 		$goodsHandle->order  = "go.id desc";
-		$goodsHandle->fields = "distinct go.id,go.name,go.sell_price,go.market_price,go.store_nums,go.img,go.is_del,go.seller_id,go.is_share,go.sort,go.promo,go.type";
+		$goodsHandle->fields = "distinct go.id,go.name,go.sell_price,go.market_price,go.store_nums,go.img,go.is_del,go.seller_id,go.is_share,go.sort,go.promo,go.type,co.point";
 		$goodsHandle->page   = $page;
 		$goodsHandle->where  = $where;
 		$goodsHandle->join   = $join;

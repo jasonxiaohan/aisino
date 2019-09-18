@@ -15,6 +15,12 @@ class Errors extends IController
 {
 	public $layout = 'site';
 
+	function init()
+	{
+		$user = Api::run('getMemberInfo');
+		$this->setRenderData(["user" => $user]);
+	}
+
 	//根据场景跳转不同的错误界面
 	private function sence()
 	{

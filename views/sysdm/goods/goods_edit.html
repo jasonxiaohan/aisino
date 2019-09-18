@@ -197,7 +197,7 @@
 									<%}%>
 									<td>库存</td>
 									<td>市场价格</td>
-									<td>销售价格</td>
+									<td>兑换积分</td>
 									<td>成本价格</td>
 									<td>重量(克)</td>
 									<%if(isProduct == true){%>
@@ -234,7 +234,7 @@
 									<td>
 										<input type='hidden' name="_groupPrice[<%=i%>]" value="<%=item['groupPrice']%>" />
 										<input class="form-control input-sm" name="_sell_price[<%=i%>]" type="text" pattern="float" value="<%=item['sell_price']%>" style="width:70px;display:inline;" />
-										<button class="btn btn-sm <%if(item['groupPrice']){%>btn-success<%}else{%>btn-default<%}%>" type="button" onclick="memberPrice(this);"><i class="fa fa-user"></i> 会员价格</button>
+										<!-- <button class="btn btn-sm <%if(item['groupPrice']){%>btn-success<%}else{%>btn-default<%}%>" type="button" onclick="memberPrice(this);"><i class="fa fa-user"></i> 会员价格</button> -->
 									</td>
 									<td><input class="form-control input-sm" name="_cost_price[<%=i%>]" type="text" pattern="float" empty value="<%=item['cost_price']%>" style="width:70px" /></td>
 									<td><input class="form-control input-sm" name="_weight[<%=i%>]" type="text" pattern="float" empty value="<%=item['weight']%>" style="width:70px" /></td>

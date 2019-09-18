@@ -78,7 +78,7 @@
 				<th></th>
 				<th>商品名称</th>
 				<th>分类</th>
-				<th>销售价</th>
+				<th>积分价</th>
 				<th>库存</th>
 				<th>状态</th>
 				<th>排序</th>
@@ -99,7 +99,8 @@
 					[{$catName['name']}]
 				{/foreach}
 				</td>
-				<td><a href="javascript:quickEdit({$item['id']},'price');"  title="点击更新价格" id="priceText{$item['id']}">{$item['sell_price']}</a></td>
+				<!-- <td><a href="javascript:quickEdit({$item['id']},'price');"  title="点击更新价格" id="priceText{$item['id']}">{$item['sell_price']}</a></td> -->
+				<td>{$item['point']}</td>
 				<td><a href="javascript:quickEdit({$item['id']},'store');"  title="点击更新库存" id="storeText{$item['id']}">{$item['store_nums']}</a></td>
 				<td>
 					<select class="form-control input-sm" onchange="changeIsDel({$item['id']},this)">
