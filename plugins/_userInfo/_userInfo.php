@@ -255,7 +255,6 @@ class _userInfo extends pluginBase
 					$poinLogObj->setData($pointLogArray);
 					$poinLogObj->add();
 				}
-				
 				return fasle;
 			}
 		}								
@@ -308,6 +307,24 @@ class _userInfo extends pluginBase
 		$memberObj = new IModel('member');
 		$memberObj->setData($memberArray);
 		$memberObj->add();
+
+		// 如果同步信商达积分时，信商达积分 > 商城积分时，则记录增加的积分数量
+		$point = $userData['data']['point'] - $memberRow['point'];
+		if($point > 0) {
+			$poinLogObj    = new IModel('point_log');
+			$pointLogArray = array(
+				'user_id' => $user_id,
+				'datetime'=> ITime::getDateTime(),
+				'value'   => $point,
+				'intro'   => "从信商达同步积分，将积分增加".$point,
+				'history_point' => $userData['data']['point'],
+				'unique'  => uniqid(),
+				'status'  => 1,
+				'disable' => 1
+			);
+			$poinLogObj->setData($pointLogArray);
+			$poinLogObj->add();
+		}
 
 		//邮箱激活帐号
 		if($reg_option == 1)

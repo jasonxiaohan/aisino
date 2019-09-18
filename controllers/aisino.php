@@ -13,4 +13,12 @@ class Aisino extends IController {
 			Aisino_class::pushPoint($point['id']);	
 		}
 	}	
+
+	/**
+	 * 每天晚上同步用户账户积分
+	 * @return [type] [description]
+	 */
+	function pushMemberPoint() {
+		Aisino_class::updateMemberPoint();
+	}
 } 

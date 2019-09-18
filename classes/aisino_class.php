@@ -31,9 +31,13 @@ class Aisino_class
 			if ($response->getStatusCode() == 200) {
 				$data = json_decode($response->getBody()->getContents(), true);
 				$result = [];
-				if ($data && $data['errorCode'] == 0) {
+				if($data && isset($data['errorCode'])) {
 					$result['code'] = $data['errorCode'];
-					$result['data'] = ['point' => $data['dataBody']['userScore'][0]['score']];
+					if(isset($data['dataBody']['userScore'])) {
+						$result['data'] = ['point' => $data['dataBody']['userScore'][0]['score']];
+					} else {
+						$result['data'] = ['point' => 0];
+					}
 				}
         		return $result;
 			}
@@ -98,12 +102,10 @@ class Aisino_class
 		            function (ResponseInterface $res) use($pointLogObj,$pointLog) {		             		            	          	
 		            	if ($res->getStatusCode() == 200) {
 		            		$result = json_decode($res->getBody()->getContents(), true);
-		            		// var_dump($result);exit;
 		            		if ($result['code'] == 0) {
 								$pointLogObj->setData(['status' => 1]);
 								$pointLogObj->update("id = ".$pointLog['id']);										            
 							} else {
-		            		// var_dump($result);exit;
 								$notice_time = Aisino_class::noticeTime($pointLog['retry_num']);
 								$pointLogObj->setData(['notice_time' => $notice_time, 'retry_num' => $pointLog['retry_num'] + 1]);
 								$pointLogObj->update("id = ".$pointLog['id']);
@@ -129,6 +131,48 @@ class Aisino_class
 				$pointLogObj->update("id = ".$pointLog['id']);
 			}
 		}	
+	}
+
+	/**
+	 * 定时更新用户的积分
+	 * @return [type] [description]
+	 */
+	public static function updateMemberPoint() {
+		$memberObj = new IModel('member');
+		$memberRows = $memberObj->query("status = 1", "user_id,mobile,point");
+		foreach($memberRows as $key=>$val) {
+			if(empty($val['mobile']))
+				continue;
+			$result = Aisino_class::getMobile($val['mobile']);
+			if (!$result || $result['code'] != 0) 
+				continue;
+
+			$point = $result['data']['point'] - $val['point'];
+			// 如果同步信商达积分时，信商达积分 > 商城积分时，则记录增加的积分数量
+			if($point <= 0)
+				continue;	
+
+			// 修改member表中的，point
+			// 添加point_log记录
+			$memberObj = new IModel('member');
+			$memberObj->setData(['point' => $result['data']['point']]);
+			if($memberObj->update("user_id = ".$val['user_id']) === false)
+				$memberObj->rollback();
+						
+			$poinLogObj    = new IModel('point_log');
+			$pointLogArray = array(
+				'user_id' => $val['user_id'],
+				'datetime'=> ITime::getDateTime(),
+				'value'   => $point,
+				'intro'   => "从信商达同步积分，将积分增加".$point,
+				'history_point' => $result['data']['point'],
+				'unique'  => uniqid(),
+				'status'  => 1,
+				'disable' => 1
+			);
+			$poinLogObj->setData($pointLogArray);
+			$poinLogObj->add();		
+		}
 	}
 
 	/**

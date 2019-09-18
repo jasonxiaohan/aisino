@@ -37,7 +37,7 @@ class ICookie
      * @param string $path 工作路径
      * @param string $domain 作用域
      */
-	public static function set($name,$value='',$time=1,$path='/',$domain=null)
+	public static function set($name,$value='',$time=0.5,$path='/',$domain=null)
 	{
 		if($time <= 0)
 		{
