@@ -202,13 +202,13 @@ $(function(){
                 <div class="cart_sect cart_2_count">
                     <div class="info_head cart_sect_header">结算信息</div>
                     <div class="count">
-                        {if:$this->final_sum != $this->sum}优惠后总金额{else:}商品总金额{/if}：<strong>{$this->final_sum}</strong><br>
+                        <!-- {if:$this->final_sum != $this->sum}优惠后总金额{else:}商品总金额{/if}：<strong>{$this->final_sum}</strong><br>
                         - 代金券：<strong name='ticket_value'>0</strong><br>
-                        <!-- + 税金：<strong id='tax_fee'>0</strong><br> -->
+                        + 税金：<strong id='tax_fee'>0</strong><br>
                         + 运费总计：<strong id='delivery_fee_show'>0</strong><br>
-                        <!-- + 保价：<strong id='protect_price_value'>0</strong><br> -->
-                        <!-- + 支付手续费：<strong id='payment_value'>0</strong> -->
-                        {if:$this->spend_point > 0} + 消耗积分：<strong>{$this->spend_point}</strong>{/if}
+                        + 保价：<strong id='protect_price_value'>0</strong><br>
+                        + 支付手续费：<strong id='payment_value'>0</strong> -->
+                        {if:$this->spend_point > 0}  消耗积分：<strong>{$this->spend_point}</strong>{/if}
                     </div>
                     <!-- <div class="btn_box">
                         <div class="btn btn_all btn_pink" onclick="orderFormInstance.ticketShow();">使用代金券</div>

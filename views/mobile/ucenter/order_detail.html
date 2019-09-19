@@ -16,40 +16,11 @@
 			<th>订单状态</th>
 			<td>{echo:Order_Class::orderStatusText(Order_Class::getOrderStatus($this->order_info))}</td>
 		</tr>
-		
-		<tr>
-			<th>订单价格</th>
-			<td>
-				商品总金额：￥{$item['payable_amount']}
-				<span class="red">+</span> 运费：￥
-				<label id="freightFee">{$item['real_freight']}</label>
-				{if:$item['taxes'] > 0}
-				<span class="red">+</span> 税金：￥{$item['taxes']}
-				{/if}
-				{if:$item['pay_fee'] > 0}
-				<span class="red">+</span> 支付手续费：￥{$item['pay_fee']}
-				{/if}
-				{if:$item['insured'] > 0}
-				<span class="red">+</span> 保价：￥{$item['insured']}
-				{/if}
-				{if:$item['discount'] > 0}
-				<span class="red">+</span> 订单涨价：￥{$item['discount']}
-				{/if}
-				{if:$item['discount'] < 0}
-				<span class="red">-</span> 订单折扣：￥{$item['discount']}
-				{/if}
-				{if:$item['promotions'] > 0}
-				<span class="red">-</span> 促销优惠金额：￥{$item['promotions']}
-				{/if}				
-				{if:$this->order_info['spend_point'] > 0}
-	            <span class="red">-</span> 消耗积分：{$this->order_info['spend_point']} 积分
-	            {/if}
-			</td>
-		</tr>
-		<tr>
+			
+		<!-- <tr>
 			<th>共需支付</th>
 			<td>￥{$item['order_amount']}</td>
-		</tr>
+		</tr> -->
 		<tr>
 			<th>收货人</th>
 			<td>{$item['accept_name']}</td>
@@ -101,10 +72,10 @@
 			<td>{$item['freight']['delivery_code']}</td>
 		</tr>
 		{/if}
-		<tr>
+		<!-- <tr>
 			<th>运费</th>
 			<td>{$item['real_freight']}</td>
-		</tr>
+		</tr> -->
 		<tr>
 			<th>支付方式</th>
 			<td>{$item['payment']}</td>
@@ -151,11 +122,7 @@
 				<input type='button' class='btn' value='点击查询' onclick="freightLine({$good['delivery_id']});" />
 			</td>
 		</tr>
-		{/if}
-		<tr>
-			<th>商品单价</th>
-			<td>￥{$good['real_price']}</td>
-		</tr>
+		{/if}		
 		<tr>
 			<th>商品数量</th>
 			<td>x {$good['goods_nums']}</td>
@@ -163,11 +130,7 @@
 		<tr>
 			<th>兑换积分</th>
 			<td>{echo:$good['point']*$good['goods_nums']}</td>
-		</tr>
-		<tr>
-			<th>优惠金额</th>
-			<td>￥{echo:$good['goods_price']-$good['real_price']}</td>
-		</tr>
+		</tr>		
 	</table>
 	{/foreach}
 	</div>

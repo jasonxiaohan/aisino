@@ -184,8 +184,8 @@ $(function(){
 						<tr>
 							<th>图片</th>
 							<th>商品名称</th>							
-							<th>单价</th>
-							<th>优惠</th>
+							<!-- <th>单价</th>
+							<th>优惠</th> -->
 							<th>积分</th>
 							<th>数量</th>
 							<!-- <th>小计</th> -->
@@ -207,8 +207,8 @@ $(function(){
 								</p>
 								{/if}
 							</td>							
-							<td><em>￥{$item['sell_price']}</em></td>
-							<td>减￥{$item['reduce']}</td>
+							<!-- <td><em>￥{$item['sell_price']}</em></td>
+							<td>减￥{$item['reduce']}</td> -->
 							<td><em>{$item['spend_point']}</em></td>
 							<td>{$item['count']}</td>
 							<!-- <td id="deliveryFeeBox_{$item['goods_id']}_{$item['product_id']}_{$item['count']}"><em>￥{$item['sum']}</em></td> -->
@@ -223,12 +223,12 @@ $(function(){
 			<h3>结算信息</h3>
 			<div class="cart_item_count">
 				<div class="count">
-					{if:$this->final_sum != $this->sum}优惠后总金额{else:}商品总金额{/if}：<strong>{$this->final_sum}</strong> -
+					<!-- {if:$this->final_sum != $this->sum}优惠后总金额{else:}商品总金额{/if}：<strong>{$this->final_sum}</strong> -
 					优惠券：<strong name='ticket_value'>0</strong> +
 					税金：<strong id='tax_fee'>0</strong> +
 					运费总计：<strong id='delivery_fee_show'>0</strong> +
-					保价：<strong id='protect_price_value'>0</strong>
-					{if:$this->spend_point > 0} + 消耗积分：<strong>{$this->spend_point}</strong>{/if}
+					保价：<strong id='protect_price_value'>0</strong> -->
+					{if:$this->spend_point > 0}  消耗积分：<strong>{$this->spend_point}</strong>{/if}
 					<!-- <br>
 					<div class="use_ticket_btn" onclick="orderFormInstance.ticketShow()">
 						<i class="fa fa-tag"></i>
