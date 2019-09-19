@@ -82,7 +82,7 @@ class Menu
         	),
 		),
 
-		'营销'=>array(
+		/*'营销'=>array(
         	'促销活动' => array(
         		'/market/pro_rule_list' => '促销活动列表'
         	),
@@ -95,7 +95,7 @@ class Menu
         	'优惠券管理'=>array(
         		'/market/ticket_list'       => '优惠券列表',
         	)
-		),
+		),*/
 
 		'统计'=>array(
 			'基础数据统计'=>array(
@@ -177,11 +177,11 @@ class Menu
             	'/tools/seo_sitemaps' => '网站搜索地图',
 			)
 		),
-		'插件' => array(
+		/*'插件' => array(
        		'插件管理' => array(
        			'/plugins/plugin_list' => '插件列表',
        		),
-		),
+		),*/
 	);
 
 	//非菜单连接映射关系,array(视图名称 => menu数组中已存在的菜单连接)
