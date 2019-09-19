@@ -23,7 +23,8 @@ class Simple extends IController
 
 	function init()
 	{
-
+        $user = Api::run('getMemberInfo');
+        $this->setRenderData(["user" => $user]);
 	}
 
 	function login()
