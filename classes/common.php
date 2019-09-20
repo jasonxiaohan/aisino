@@ -117,6 +117,8 @@ class Common
 		{
 			$weightUnit = "kg";
 			$weightVal /= 1000;
+		} else {
+			return "";
 		}
 		return $weightVal.$weightUnit;
 	}
