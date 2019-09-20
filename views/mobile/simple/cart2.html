@@ -171,13 +171,7 @@ $(function(){
                 <!--订单留言 结束-->
                 <!--购买清单 开始-->
                 <div class="cart_sect cart_2_pro">
-                    <div class="info_head cart_sect_header">购买的商品</div>
-                    <ol {if:empty($this->promotion)}style="display:none"{/if}>
-                        <span>本单享受的活动：</span>
-                        {foreach:items = $this->promotion}
-                        <li>{$item['plan']}，{$item['info']}</li>
-                        {/foreach}
-                    </ol>
+                    <div class="info_head cart_sect_header">购买的商品</div>                    
                     <!-- 商品展示 开始-->
                     <ul>
                     {foreach:items = $this->goodsList}
@@ -242,7 +236,7 @@ $(function(){
                             确认
                         </label>
                         <div class="trade_count">
-                            <span>应付积分:</span>
+                            <span>兑付积分:</span>
                             <em>{$this->spend_point}</em>
                         </div>
                     </div>

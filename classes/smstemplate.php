@@ -26,7 +26,7 @@ class smsTemplate
 	 */
 	public static function sendGoods($data = null)
 	{
-		$templateString = "【澳佳】您好{user_name},订单号:{order_no},已由{sendor}发货,物流公司:{delivery_company},物流单号:{delivery_no}";
+		$templateString = "【积分商城】您好{user_name},订单号:{order_no},已由{sendor}发货,物流公司:{delivery_company},物流单号:{delivery_no}";
 		return strtr($templateString,$data);
 	}
 
@@ -36,7 +36,7 @@ class smsTemplate
 	 */
 	public static function findPassword($data = null)
 	{
-		$templateString = "【澳佳】您的验证码为:{mobile_code},请注意保管!";
+		$templateString = "【积分商城】您的验证码为:{mobile_code},请注意保管!";
 		return strtr($templateString,$data);
 	}
 
@@ -46,7 +46,7 @@ class smsTemplate
 	 */
 	public static function checkCode($data = null)
 	{
-		$templateString = "【澳佳】您的验证码为:{mobile_code},请注意保管!";
+		$templateString = "【积分商城】您的验证码为:{mobile_code},请注意保管!";
 		return strtr($templateString,$data);
 	}
 
@@ -56,7 +56,7 @@ class smsTemplate
 	 */
 	public static function takeself($data = null)
 	{
-		$templateString = "【澳佳】您的订单号:{orderNo},{name}自提地址:{address},领取验证码:{mobile_code},请尽快领取";
+		$templateString = "【积分商城】您的订单号:{orderNo},{name}自提地址:{address},领取验证码:{mobile_code},请尽快领取";
 		return strtr($templateString,$data);
 	}
 
@@ -66,7 +66,7 @@ class smsTemplate
 	 */
 	public static function sellerReg($data = null)
 	{
-		$templateString = "【澳佳】{true_name},申请加盟到平台,请尽快登录后台进行处理";
+		$templateString = "【积分商城】{true_name},申请加盟到平台,请尽快登录后台进行处理";
 		return strtr($templateString,$data);
 	}
 
@@ -76,7 +76,7 @@ class smsTemplate
 	 */
 	public static function sellerCheck($data = null)
 	{
-		$templateString = "【澳佳】您申请的加盟商状态已经被修改为:{result}状态,请登录您的商户后台查看具体的详情";
+		$templateString = "【积分商城】您申请的加盟商状态已经被修改为:{result}状态,请登录您的商户后台查看具体的详情";
 		return strtr($templateString,$data);
 	}
 
@@ -85,7 +85,7 @@ class smsTemplate
 	 */
 	public static function payFinishToAdmin($data = null)
 	{
-		$templateString = "【澳佳】商城订单:{orderNo},已经付款,请尽快登录后台进行处理";
+		$templateString = "【积分商城】商城订单:{orderNo},已经付款,请尽快登录后台进行处理";
 		return strtr($templateString,$data);
 	}
 
@@ -94,7 +94,7 @@ class smsTemplate
 	 */
 	public static function payFinishToUser($data = null)
 	{
-		$templateString = "【澳佳】您的订单号:{orderNo},已付款成功,稍后我们会尽快为您服务";
+		$templateString = "【积分商城】您的订单号:{orderNo},已付款成功,稍后我们会尽快为您服务";
 		return strtr($templateString,$data);
 	}
 
@@ -104,7 +104,7 @@ class smsTemplate
 	 */
 	public static function notify($data = null)
 	{
-		$templateString = "【澳佳】尊敬的用户，您需要购买的 <{goodsName}> 现已全面到货，机不可失，从速购买！{url}; 退订回N";
+		$templateString = "【积分商城】尊敬的用户，您需要购买的 <{goodsName}> 现已全面到货，机不可失，从速购买！{url}; 退订回N";
 		return strtr($templateString,$data);
 	}
 
@@ -114,7 +114,7 @@ class smsTemplate
 	 */
 	public static function takeselfGoods($data = null)
 	{
-		$templateString = "【澳佳】您好{user_name},订单号:{order_no},在{takeself}已经成功提货";
+		$templateString = "【积分商城】您好{user_name},订单号:{order_no},在{takeself}已经成功提货";
 		return strtr($templateString,$data);
 	}
 
@@ -125,7 +125,7 @@ class smsTemplate
 	 */
 	public static function login($param) 
 	{
-		$templateString = "【澳佳】您的验证码是{mobile_code},转发给他人可能导致帐号被盗，请勿泄漏，谨防被骗。";
+		$templateString = "【积分商城】您的验证码是{mobile_code},转发给他人可能导致帐号被盗，请勿泄漏，谨防被骗。";
 		return strtr($templateString, $param);
 	}
 }

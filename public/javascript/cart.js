@@ -4,6 +4,7 @@ __openUpdateStatus = true;
 //购物车数量改动计算
 function cartCount(obj)
 {
+	console.log(1);
 	if(__openUpdateStatus == false)
 	{
 		return false;
@@ -39,25 +40,28 @@ function cartCount(obj)
 		{
 			return;
 		}
+
 		var goods_id   = obj.product_id > 0 ? obj.product_id : obj.goods_id;
 		var goods_type = obj.product_id > 0 ? "product"      : "goods";
+		var sum_point = $('#sum_price').text();
 
 		//更新购物车中此商品的数量
-		$.getJSON(creatUrl("/simple/joinCart"),{"goods_id":goods_id,"type":goods_type,"goods_num":diff,"random":Math.random()},function(content){
+		$.getJSON(creatUrl("/simple/joinCart"),{"goods_id":goods_id,"type":goods_type,"goods_num":diff,"sum_point": sum_point,"random":Math.random()},function(content){
 			if(content.isError == true)
-			{
+			{				
 				alert(content.message);
-				countInput.val(1);
-				countInput.data('oldNum',1);
+				countInput.val(oldNum);
+				countInput.data('oldNum',oldNum);
 				countInput.change();
+				__openUpdateStatus = true;
 			}
 			else
 			{
+				console.log(4);
 				countInput.data('oldNum',countInputVal);
 				refreshCount();
-
 				//更新小计的价格
-				$('#sum_'+obj.goods_id+'_'+obj.product_id).html(((obj.sell_price - obj.reduce) * countInputVal).toFixed(2));
+				$('#sum_'+obj.goods_id+'_'+obj.product_id).html(((obj.sell_price) * countInputVal).toFixed(2));
 			}
 		});
 	}
@@ -66,6 +70,7 @@ function cartCount(obj)
 //增加商品数量
 function cart_increase(obj)
 {
+	console.log(2);
 	//库存超量检查
 	var countInput = $('#count_'+obj.goods_id+'_'+obj.product_id);
 	if(parseInt(countInput.val()) + 1 > parseInt(obj.store_nums))
@@ -73,7 +78,7 @@ function cart_increase(obj)
 		alert('购买的数量大于此商品的库存量');
 	}
 	else
-	{
+	{		
 		if(__openUpdateStatus == false)
 		{
 			return false;
@@ -86,6 +91,7 @@ function cart_increase(obj)
 //减少商品数量
 function cart_reduce(obj)
 {
+	console.log(3);
 	//库存超量检查
 	var countInput = $('#count_'+obj.goods_id+'_'+obj.product_id);
 	if(parseInt(countInput.val()) - 1 <= 0)
@@ -150,10 +156,10 @@ function refreshCount()
 
 		/*开始更新数据*/
 		$('#weight').html(content.weight);
-		$('#origin_price').html(content.sum.toFixed(2));
-		$('#discount_price').html(content.reduce.toFixed(2));
-		$('#promotion_price').html(content.proReduce.toFixed(2));
-		$('#sum_price').html(content.final_sum.toFixed(2));
+		$('#origin_price').html(content.sum);
+		$('#discount_price').html(content.reduce);
+		$('#promotion_price').html(content.proReduce);
+		$('#sum_price').html(content.final_sum);		
 
 		if(content.goodsList)
 		{

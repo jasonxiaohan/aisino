@@ -54,6 +54,7 @@ class Cart
 		{
 			$type = 'product';
 		}
+		// $user_id    = IWeb::$app->getController()->user['user_id'];			
 
 		//获取基本的商品数据
 		$goodsRow = $this->getGoodInfo($gid,$type);

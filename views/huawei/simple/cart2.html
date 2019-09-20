@@ -162,15 +162,7 @@ $(function(){
 			</div>
 		</section>
 		<section class="cart_item">
-			<h3>购买的商品</h3>
-			<div class="cart_prompts {if:empty($this->promotion)}none{/if}">
-				<strong>恭喜，您的订单已经满足了以下优惠活动！</strong>
-				<ol>
-					{foreach:items = $this->promotion}
-					<li>{$item['plan']}，{$item['info']}</li>
-					{/foreach}
-				</ol>
-			</div>
+			<h3>购买的商品</h3>		
 			<div class="cart_item_goods">
 				<table>
 					<col width="115">
@@ -221,20 +213,7 @@ $(function(){
 		</section>
 		<section class="cart_item">
 			<h3>结算信息</h3>
-			<div class="cart_item_count">
-				<div class="count">
-					<!-- {if:$this->final_sum != $this->sum}优惠后总金额{else:}商品总金额{/if}：<strong>{$this->final_sum}</strong> -
-					优惠券：<strong name='ticket_value'>0</strong> +
-					税金：<strong id='tax_fee'>0</strong> +
-					运费总计：<strong id='delivery_fee_show'>0</strong> +
-					保价：<strong id='protect_price_value'>0</strong> -->
-					{if:$this->spend_point > 0}  消耗积分：<strong>{$this->spend_point}</strong>{/if}
-					<!-- <br>
-					<div class="use_ticket_btn" onclick="orderFormInstance.ticketShow()">
-						<i class="fa fa-tag"></i>
-						<span>使用代金卷</span>
-					</div> -->
-				</div>
+			<div class="cart_item_count">				
 				<table>
 					<col width="220">
 					<col>
@@ -242,7 +221,7 @@ $(function(){
 					<tr>						
 						<td>
 							<div class="all_count">
-								应付积分：<em><span>{$this->spend_point}</span></em> 
+								兑付积分：<em><span>{$this->spend_point}</span></em> 
 							</div>
 						</td>
 					</tr>

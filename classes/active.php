@@ -250,6 +250,25 @@ class Active
 		return "未知促销活动";
 	}
 
+	public function checkCart($spend_point) {
+		if(!$this->user_id)
+        {
+            return "参加积分兑换请您先登录";
+        }
+
+        $memberDB  = new IModel('member');
+        $memberRow = $memberDB->getObj('user_id = '.$this->user_id,'point,group_id');
+        if(!$memberRow)
+        {
+            return "用户信息不存在";
+        }
+
+        if($memberRow['point'] < $spend_point)
+        {
+            return "用户积分不足";
+        }
+	}
+
 	//获取活动名称
 	public static function name($promo)
 	{

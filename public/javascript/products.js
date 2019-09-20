@@ -333,7 +333,7 @@ function productClass(goods_id,user_id,promo,active_id,type)
 					$('[name="mycart_count"]').text(json.count);
 					$('[name="mycart_sum"]').text(json.sum);
 
-					tips("目前选购商品共"+json.count+"件，合计：￥"+json.sum);
+					tips("目前选购商品共"+json.count+"件，合计："+json.sum+"积分");
 				});
 			}
 			else
@@ -436,7 +436,7 @@ function productClass(goods_id,user_id,promo,active_id,type)
 		//促销活动或者虚拟商品隐藏购物车按钮
 		if((_self.promo && _self.active_id) || _self.type != 'default')
 		{
-			$('#joinCarButton').hide();
+			// $('#joinCarButton').hide();
 		}
 	}())
 }

@@ -38,7 +38,7 @@
 						{/foreach}
 						{/if}
 					</p>
-					<em class="cart_list_info_price">单价：￥{$item['sell_price']}</em>
+					<em class="cart_list_info_price">积分：{$item['sell_price']}</em>
 				</div>
 			</div>
 			<del class="del" onclick='javascript:removeCartByJSON(item{$goodsKey});'>删除</del>
@@ -47,7 +47,7 @@
 				<input type='text' onchange='cartCount(item{$goodsKey});' id="count_{$item['goods_id']}_{$item['product_id']}" value="{$item['count']}">
 				<span onclick='cart_increase(item{$goodsKey});'>+</span>
 			</div>
-			<div class="count">小结：￥<span id="sum_{$item['goods_id']}_{$item['product_id']}">{$item['sum']}</span></div>
+			<div class="count">小结：<span id="sum_{$item['goods_id']}_{$item['product_id']}">{$item['sum']}</span></div>
 		</li>
 		{/foreach}
 	</ul>
@@ -58,15 +58,11 @@
 	<table>
 		<tr>
 			<th>总重量</th>
-			<th>总金额</th>
-			<th>商品优惠</th>
-			<th>促销优惠</th>
+			<th>兑付积分</th>
 		</tr>
 		<tr>
 			<td><span id='weight'>{$this->weight}</span></td>
-			<td>￥<span id='origin_price'>{$this->sum}</span></td>
-			<td>￥<span id='discount_price'>{$this->reduce}</span></td>
-			<td>￥<span id='promotion_price'>{$this->proReduce}</span></td>
+			<td><span id='origin_price'>{$this->sum}</span></td>
 		</tr>
 	</table>
 </section>
@@ -81,9 +77,8 @@
 			去结算
 		</div>
 		<div class="count">
-			<span>合计:</span>
-			<em>￥<i id='sum_price'>{$this->final_sum}</i></em>
-			<u>不含运费</u>
+			<span>合计积分:</span>
+			<em><i id='sum_price'>{$this->final_sum}</i></em>
 		</div>
 	</div>
 </footer>

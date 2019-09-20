@@ -27,7 +27,7 @@
 				<col width="120px">
 			</colgroup>
 			<thead>
-				<tr><th><input type="checkbox" name="_selectCartGoods" onchange="selectAll('selectCartGoods');" /></th><th>图片</th><th>商品名称</th><th>赠送积分</th><th>单价</th><th>优惠</th><th>数量</th><th>小计</th><th>操作</th></tr>
+				<tr><th><input type="checkbox" name="_selectCartGoods" onchange="selectAll('selectCartGoods');" /></th><th>图片</th><th>商品名称</th><th>积分</th><th>数量</th><th>小计</th><th>操作</th></tr>
 			</thead>
 			<tbody>
 				{foreach:items = $this->goodsList key=$goodsKey}
@@ -46,9 +46,7 @@
 						</p>
 						{/if}
 					</td>
-					<td>{$item['point']}</td>
-					<td><em>￥{$item['sell_price']}</em></td>
-					<td>减￥{$item['reduce']}</td>
+					<td><em>{$item['sell_price']}</em></td>
 					<td>
 						<div class="goods_resize">
 							<span class="reduce" onclick='cart_reduce(item{$goodsKey});'>─</span>
@@ -56,16 +54,15 @@
 							<span class="add" onclick='cart_increase(item{$goodsKey});'>+</span>
 						</div>
 					</td>
-					<td><em>￥<span id="sum_{$item['goods_id']}_{$item['product_id']}">{$item['sum']}</span></em></td>
+					<td><em><span id="sum_{$item['goods_id']}_{$item['product_id']}">{$item['sum']}</span></em></td>
 					<td><a href="javascript:void(0);" onclick='removeCartByJSON(item{$goodsKey})'>删除</a></td>
 				</tr>
 				{/foreach}
 
 				<tr>
-					<td colspan="9" class="stats">
+					<td colspan="7" class="stats">
 						<span>商品总重量：<b id='weight'>{$this->weight}</b></span><br>
-						<span>商品总金额：￥<b id='origin_price'>{$this->sum}</b> - 商品优惠：￥<b id='discount_price'>{$this->reduce}</b> - 促销活动优惠：￥<b id='promotion_price'>{$this->proReduce}</b></span><br>
-						金额总计（不含运费）：￥<em id='sum_price'>{$this->final_sum}</em>
+						合计积分：<em id='sum_price'>{$this->final_sum}</em>
 					</td>
 				</tr>
 			</tbody>

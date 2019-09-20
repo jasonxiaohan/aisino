@@ -102,6 +102,33 @@ class Simple extends IController
     	$goods_num = IFilter::act(IReq::get('goods_num'),'int');
     	$goods_num = $goods_num == 0 ? 1 : $goods_num;
 		$type      = IFilter::act(IReq::get('type'));
+        $sum_point = IFilter::act(IReq::get('sum_point'),'int');
+
+        // 检查账户积分是否足够
+        $user_id = ($this->user['user_id'] == null) ? 0 : $this->user['user_id'];
+        $memberObj = new IModel('member');
+        $memberRow = $memberObj->getObj("user_id = ".$user_id,"point");
+
+        $costPointObj = new IModel('cost_point');
+        $costPointRow = $costPointObj->getObj("goods_id = ".$goods_id,"point");
+        if(!$costPointRow) {
+            $result = array(
+                'isError' => true,
+                'message' => '积分商品不存在',
+            );
+            echo JSON::encode($result);
+            return;
+        }
+
+        if($sum_point + ($goods_num * $costPointRow['point']) > $memberRow['point']) {
+            $result = array(
+                'isError' => true,
+                'message' => '用户积分不足',
+            );
+            echo JSON::encode($result);
+            return;
+        }
+
 
 		//加入购物车
     	$cartObj   = new Cart();
@@ -559,7 +586,7 @@ class Simple extends IController
 
 				//商品价格
 				'payable_amount'      => $goodsResult['sum'],
-				'real_amount'         => $goodsResult['final_sum'],
+				'real_amount'         => 0,//$goodsResult['final_sum'],
 
 				//运费价格
 				'payable_freight'     => $goodsResult['deliveryOrigPrice'],
@@ -574,7 +601,7 @@ class Simple extends IController
 				'promotions'          => $goodsResult['proReduce'] + $goodsResult['reduce'],
 
 				//订单应付总额
-				'order_amount'        => $goodsResult['orderAmountPrice'],
+				'order_amount'        => 0,//$goodsResult['orderAmountPrice'],
 
 				//订单保价
 				'insured'             => $goodsResult['insuredPrice'],

@@ -185,7 +185,7 @@ class CountSum
     	$giftIds      = [];//奖励性促销规则IDS
 
         //判断商品是否存在活动情况
-        $promo      = "";
+        $promo      = "costpoint";
         $active_id  = 0;
         $goodsCount = 0;
         foreach($buyInfo as $key => $val)
@@ -221,7 +221,7 @@ class CountSum
 
 		//活动购买情况
     	if($promo && $active_id)
-    	{
+    	{    		
     		$ac_type    = isset($buyInfo['goods']) && $buyInfo['goods']['id'] ? "goods" : "product";
     		$ac_id      = current($buyInfo[$ac_type]['id']);
     		$ac_buy_num = $buyInfo[$ac_type]['data'][$ac_id]['count'];
@@ -239,9 +239,10 @@ class CountSum
 				//设置优惠价格，如果不存在则优惠价等于商品原价
 				$typeRow['reduce'] = round($typeRow['sell_price'] - $disPrice,2);
 				$typeRow['count']  = $ac_buy_num;
-    			$current_sum_all   = $typeRow['sell_price'] * $ac_buy_num;
+    			$current_sum_all   = $typeRow['sell_price'] * $ac_buy_num;	    		
+
     			$current_reduce_all= $typeRow['reduce']     * $ac_buy_num;
-				$typeRow['sum']    = $current_sum_all - $current_reduce_all;
+				$typeRow['sum']    = $current_sum_all;
 
     			if(!isset($this->seller[$typeRow['seller_id']]))
     			{
@@ -266,7 +267,7 @@ class CountSum
 	    	}
     	}
     	else
-    	{
+    	{    		
 			/*开始计算goods和product的优惠信息 , 会根据条件分析出执行以下哪一种情况:
 			 *(1)查看此商品(货品)是否已经根据不同会员组设定了优惠价格;
 			 *(2)当前用户是否属于某个用户组中的成员，并且此用户组享受折扣率;
@@ -276,7 +277,7 @@ class CountSum
 			//获取商品或货品数据
 			/*Goods 拼装商品优惠价的数据*/
 	    	if(isset($buyInfo['goods']['id']) && $buyInfo['goods']['id'])
-	    	{
+	    	{	    		
 	    		//购物车中的商品数据
 	    		$goodsIdStr = join(',',$buyInfo['goods']['id']);
 	    		$goodsObj   = new IQuery('goods as go');
@@ -299,7 +300,8 @@ class CountSum
 	    			$goodsList[$key]['count']  = $buyInfo['goods']['data'][$val['goods_id']]['count'];
 	    			$current_sum_all           = $goodsList[$key]['sell_price'] * $goodsList[$key]['count'];
 	    			$current_reduce_all        = $goodsList[$key]['reduce']     * $goodsList[$key]['count'];
-	    			$goodsList[$key]['sum']    = round($current_sum_all - $current_reduce_all,2);
+	    			$goodsList[$key]['sum']    = $current_sum_all - $current_reduce_all;
+	    			$goodsList[$key]['spend_point']    = $current_sum_all - $current_reduce_all;
 	    			if(!isset($this->seller[$val['seller_id']]))
 	    			{
 	    				$this->seller[$val['seller_id']] = 0;
@@ -314,7 +316,8 @@ class CountSum
 			    	$this->reduce += $current_reduce_all;
 			    	$this->count  += $goodsList[$key]['count'];
 			    	$this->tax    += self::getGoodsTax($goodsList[$key]['sum'],$val['seller_id']);
-			    }
+			    	$this->spend_point += $goodsList[$key]['spend_point'];
+			    }			   
 	    	}
 
 			/*Product 拼装商品优惠价的数据*/
@@ -340,9 +343,11 @@ class CountSum
 	    			$groupPrice                  = $this->getGroupPrice($val['product_id'],'product');
 					$productList[$key]['reduce'] = $groupPrice === null ? 0 : round($val['sell_price'] - $groupPrice,2);
 	    			$productList[$key]['count']  = $buyInfo['product']['data'][$val['product_id']]['count'];
+	    			$productList[$key]['spend_point']  = $buyInfo['product']['data'][$val['product_id']]['count'];
+
 	    			$current_sum_all             = $productList[$key]['sell_price']  * $productList[$key]['count'];
 	    			$current_reduce_all          = $productList[$key]['reduce']      * $productList[$key]['count'];
-	    			$productList[$key]['sum']    = round($current_sum_all - $current_reduce_all,2);
+	    			$productList[$key]['sum']    = $current_sum_all - $current_reduce_all;
 	    			if(!isset($this->seller[$val['seller_id']]))
 	    			{
 	    				$this->seller[$val['seller_id']] = 0;
@@ -357,7 +362,16 @@ class CountSum
 			    	$this->reduce += $current_reduce_all;
 			    	$this->count  += $productList[$key]['count'];
 			    	$this->tax    += self::getGoodsTax($productList[$key]['sum'],$val['seller_id']);
-			    }
+			    	$this->spend_point += $productList[$key]['spend_point'];
+			    }			    
+	    	}
+
+	    	// 判断用户积分是否够
+		    $activeObject      = new Active($promo,0,$user_id,0,"",0);
+	    	$activeResult      = $activeObject->checkCart($this->spend_point);	
+	    	if($activeResult !== true && $activeResult != NULL) {	    		
+	    		$this->error .= $activeResult;
+    			return $activeResult;
 	    	}
 
 	    	//总金额满足的促销规则
@@ -380,9 +394,10 @@ class CountSum
 	    	}
     	}
 
-    	$this->final_sum = $this->sum - $this->reduce - $this->proReduce;
+    	$this->final_sum = $this->sum;
     	$this->final_sum = $this->final_sum <= 0 ? 0 : $this->final_sum;
     	$resultList      = array_merge($goodsList,$productList);
+    	
     	if(!$resultList)
     	{
     		$this->error .= "当前没有选购商品，请重新选择商品下单";
@@ -421,14 +436,14 @@ class CountSum
     	    }
     	    $this->takeself = $takeselfData;
     	}
-
+    	
     	return array(
     	    'active_id'  => $active_id,
     	    'promo'      => $promo,
-    		'final_sum'  => round($this->final_sum,2),
-    		'promotion'  => $this->promotion,
+    		'final_sum'  => $this->final_sum,
+    		'promotion'  => $this->spend_point,
     		'proReduce'  => $this->proReduce,
-    		'sum'        => $this->sum,
+    		'sum'        => intval($this->sum),
     		'goodsList'  => $resultList,
     		'count'      => $this->count,
     		'reduce'     => $this->reduce,

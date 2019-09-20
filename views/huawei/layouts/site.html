@@ -16,22 +16,7 @@
 	<link rel="stylesheet" href="{skin:style/style.css}">
 </head>
 <body>
-<!-- 顶部工具栏 -->
-<!-- <div class="header_top">
-	<div class="web">
-		<div class="welcome">
-			欢迎您来到 {echo:$this->_siteConfig->name}！
-		</div>
-		<ul class="top_tool">
-			<li>{set:plugin::trigger('siteTopMenu')}</li>
-			<li><a href="{url:ucenter/index}">个人中心</a></li>
-			<li><a href="{url:/simple/seller}">申请开店</a></li>
-			<li><a href="{url:/seller/index}">商家管理</a></li>
-			<li><a href="{url:/site/help_list}">使用帮助</a></li>
-		</ul>
-	</div>
-</div> -->
-<!-- 顶部工具栏 -->
+
 <header class="header">
 	<!-- logo与搜索 -->
 	<div class="body_wrapper">
@@ -84,13 +69,13 @@
 			</div>
 			<!-- 注册与登录 -->
 			<!--购物车模板 开始-->
-			<!-- <div class="header_cart" name="mycart">
+			<div class="header_cart" name="mycart">
 				<a href="{url:/simple/cart}" class="go_cart">
 					<i class="fa fa-shopping-cart"></i>
 					<em class="sign_total" name="mycart_count"]>0</em>
 				</a>
 				<div class="cart_simple" id="div_mycart"></div>
-			</div> -->
+			</div>
 			<script type='text/html' id='cartTemplete'>
 			<div class='cart_panel'>
 				<%if(goodsCount){%>
@@ -105,7 +90,7 @@
 							</a>
 							<a class="shop_name" target="_blank" href="{url:/site/products/id/<%=data['goods_id']%>}"><%=data['name']%></a>
 							<!-- <p class="shop_class"></p> -->
-							<div class="shop_price"><p>￥ <%=data['sell_price']%> <span>x <%=data['count']%></span></p></div>
+							<div class="shop_price"><p> <%=data['sell_price']%> <span>x <%=data['count']%></span></p></div>
 							<i class="fa fa-remove" onclick="removeCart('<%=data['id']%>','<%=data['type']%>');$('#site_cart_dd_<%=item%>').hide('slow');"></i>
 						</li>
 						<%}%>
@@ -115,7 +100,7 @@
 					<div class="cart_total">
 						<p>
 							共<span name="mycart_count"><%=goodsCount%></span>件
-							总额：<em name="mycart_sum">￥<%=goodsSum%></em>
+							总积分：<em name="mycart_sum"><%=goodsSum%></em>
 						</p>
 						<a href="{url:simple/cart}">结算</a>
 					</div>
