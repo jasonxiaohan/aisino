@@ -213,7 +213,7 @@ class APIUcenter
         $where.= $cat_id ? ' and cat_id = '.$cat_id : "";
 
         $favoriteObj->where = $where;
-        $favoriteObj->page  = $page;
+        $favoriteObj->page  = $page;        
         return $favoriteObj;
     }
 

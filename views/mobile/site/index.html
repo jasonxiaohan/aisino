@@ -22,56 +22,6 @@
 </nav>
 {echo:Ad::show("首页顶部通栏100%*120(mobile)")}
 
-{set:$tuanitems=Api::run('getRegimentList',10)}
-{if:$tuanitems}
-<h2 class="home_title">
-	<i class="fa fa-bookmark"></i><strong>团购</strong>
-</h2>
-
-<section class="home_tuan_goods">
-	<ul>
-		{foreach:items=$tuanitems}
-		<li>
-			<a href="{url:/site/products/id/$item['goods_id']/promo/groupon/active_id/$item['id']}">
-				<img class="jImg" src="{url:/pic/thumb/img/$item[img]/w/200/h/200}">
-				<h3>{$item['title']}</h3>
-				<em>{$item['regiment_price']}</em>
-			</a>
-		</li>
-		{/foreach}
-	</ul>
-</section>
-{/if}
-
-{set:$qiangitems=Api::run('getPromotionList',6);}
-{if:$qiangitems}
-<h2 class="home_title">
-	<i class="fa fa-time"></i><strong>限时抢购</strong>
-</h2>
-
-<section class="home_xianshi_goods">
-	<ul>
-		{foreach:items=$qiangitems}
-		{set:$free_time = ITime::getDiffSec($item['end_time'])}
-		{set:$countNumsItem[] = $item['p_id'];}
-		<li>
-			<a href="{url:/site/products/id/$item['goods_id']/promo/time/active_id/$item['p_id']}">
-				<img class="jImg" src="{url:/pic/thumb/img/$item[img]/w/200/h/200}">
-				<h3>{$item['name']}</h3>
-				<em>{$item['award_value']}</em>
-				<time>
-					<span id='cd_hour_{$item['p_id']}'>{echo:floor($free_time/3600);}</span> 时
-					<span id='cd_minute_{$item['p_id']}'>{echo:floor(($free_time%3600)/60);}</span> 分
-					<span id='cd_second_{$item['p_id']}'>{echo:$free_time%60;}</span> 秒
-				</time>
-			</a>
-		</li>
-		{/foreach}
-	</ul>
-</section>
-
-{/if}
-
 <!-- 首页推荐商品列表 -->
 <h2 class="home_title"><i class="fa fa-gift"></i><strong>推荐商品</strong></h2>
 <section class="home_goods">
@@ -105,7 +55,7 @@
 </section>
 
 <!-- 首页特价商品列表 -->
-<h2 class="home_title"><i class="fa fa-money"></i><strong>特价商品</strong></h2>
+<!-- <h2 class="home_title"><i class="fa fa-money"></i><strong>特价商品</strong></h2>
 <section class="home_goods">
     <ul>
         {foreach:items = Api::run('getCommendPrice',8)}
@@ -117,7 +67,7 @@
         </li>
         {/foreach}
     </ul>
-</section>
+</section> -->
 
 <!-- 首页新品商品列表 -->
 <h2 class="home_title"><i class="fa fa-bell"></i><strong>最新商品</strong></h2>

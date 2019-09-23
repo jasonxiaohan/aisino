@@ -10,8 +10,7 @@
 			<a target="_blank" href="{url:/site/products/id/$item['goods_id']}">
 				<img alt="{$item['name']}" src="{url:/pic/thumb/img/$item['img']/w/205/h/205}">
 				<p class="goods_title"><span>{$item['name']}</span></p>
-				<p class="goods_sell_price">￥{$item['sell_price']}</p>
-				<p class="goods_market_price">￥{$item['market_price']}</p>
+				<p class="goods_sell_price">{$item['sell_price']}积分</p>
 			</a>
 			<div class="goods_list_btnbox">
 				<div class="add_cart" onclick="joinCart_list({$item['goods_id']});">加入购物车</div>
