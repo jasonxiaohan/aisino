@@ -102,7 +102,7 @@ class Comment_Class
 						'name'       => $goodsArray['name'],
 						'value'      => $goodsArray['value'],
 						'img'        => $orderGoodsRow['img'],
-						'sell_price' => $orderGoodsRow['real_price'],
+						'sell_price' => $orderGoodsRow['goods_price'],
 					);
 				}
 			}

@@ -75,7 +75,7 @@
 				<a target="_blank" href="{url:/site/products/id/$this->goods['goods_id']}">
 					<img alt="{$this->goods['name']}" src="{url:/pic/thumb/img/$this->goods['img']/w/205/h/205}">
 					<h5>{$this->goods['name']}</h5>
-					<em>￥{$this->goods['sell_price']}</em>
+					<em>{echo:intval($this->goods['sell_price'])}积分</em>
 					<label class="star_box">
 						<span class="item">评分</span>
 						<span class="star star_{echo:Common::gradeWidth($this->commentCount['average_point'])}"></span>
