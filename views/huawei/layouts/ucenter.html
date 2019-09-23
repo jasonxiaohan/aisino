@@ -31,7 +31,7 @@
 			<div class="body_toolbar">
 				{if:$this->user}
 					<div class="body_toolbar_btn userinfo">
-						<a href="{url:/ucenter/index}">{$this->user['username']}</a>
+						<a href="{url:/ucenter/index}">{echo:Util::shieldMobile($this->user['username'])}</a>
 						<i></i>
 					</div>
 					<div class="body_toolbar_layer">
@@ -40,7 +40,7 @@
 								<img id="user_ico_img" src="{url:$this->user['head_ico']}" onerror="this.src='{skin:image/user_ico.gif}'">
 							</a>
 							<div>
-								<a href="{url:/ucenter/index}">{$this->user['username']} </a>
+								<a href="{url:/ucenter/index}">{echo:Util::shieldMobile($this->user['username'])} </a>
 								<span>{echo:ISafe::get('last_login')}</span>
 							</div>
 						</div>

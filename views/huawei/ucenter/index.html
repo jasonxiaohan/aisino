@@ -10,7 +10,7 @@
 		<img id="user_ico_img" onclick="$('#userIcoFile').trigger('click');" src="{url:$user_ico}" onerror="this.src='{skin:image/user_ico.gif}'">
 	</div>
 	<div class="user_info">
-		<h2>{$this->user['username']}，欢迎您</h2>
+		<h2>{echo:Util::shieldMobile($this->user['username'])}，欢迎您</h2>
 		<ol class="user_baseinfo">
 			<li>总积分：<a href="{url:/ucenter/integral}"><strong>{$user['point']}</strong> 分</a></li>
 			<li>交易总数量：<a href="{url:/ucenter/order}"><strong>{$statistics['num']}</strong> 笔</a></li>
