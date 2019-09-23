@@ -197,9 +197,7 @@
 		<thead>
 			<tr>
 				<th>图片</th>
-				<th>商品名称</th>
-				<!-- <th>商品价格</th>
-				<th>优惠金额</th> -->
+				<th>商品名称</th>				
 				<th>兑换积分</th>
 				<th>商品数量</th>
 				<th>状态</th>
@@ -214,9 +212,7 @@
 				<td class="t_l">
 					<a class="blue" href="{url:/site/products/id/$good['goods_id']}" target='_blank'>{$good_info['name']}</a>
 					{if:$good_info['value']!=''}<p>{$good_info['value']}</p>{/if}
-				</td>
-				<!-- <td>￥{$good['goods_price']}</td>
-				<td>￥{echo:$good['goods_price']-$good['real_price']}</td> -->
+				</td>				
 				<td class="red2">{echo:$good['point']*$good['goods_nums']}</td>
 				<td>x {$good['goods_nums']}</td>
 				<td>
@@ -228,31 +224,11 @@
 			</tr>
 			{/foreach}
 			<tr>
-				<td colspan="8" class="tr">
-					<!-- <p>商品总金额：￥{$this->order_info['payable_amount']}</p>
-					
-					{if:$this->order_info['real_freight'] > 0}
-					<p>+ 运费：￥{$this->order_info['real_freight']}
-					{/if}
-					
-					{if:$this->order_info['taxes'] > 0}
-					<p>+ 税金：￥{$this->order_info['taxes']}</p>
-					{/if}
-					
-					{if:$this->order_info['insured'] > 0}
-					<p>+ 保价：￥{$this->order_info['insured']}</p>
-					{/if}
-					
-					<p>订单折扣或涨价：￥{$this->order_info['discount']}</p>
-					
-					{if:$this->order_info['promotions'] > 0}
-					<p>- 促销优惠金额：￥{$this->order_info['promotions']}</p>
-					{/if} -->
+				<td colspan="8" class="tr">					
 
 		            {if:$this->order_info['spend_point'] > 0}
 		            <p> 消耗积分：{$this->order_info['spend_point']} 积分</p>
-		            {/if}
-					<!-- <p>订单支付金额：<span class="red">￥<label>{$this->order_info['order_amount']}</label></span></p> -->
+		            {/if}					
 				</td>
 			</tr>
 		</tbody>

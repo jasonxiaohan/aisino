@@ -34,7 +34,7 @@
 			<thead>
 				<tr>
 					<th>商品名称</th>
-					<th>商品价格</th>
+					<th>积分价格</th>
 					<th>购买数量</th>
 					<th>选择</th>
 				</tr>
@@ -48,7 +48,7 @@
 						{set:$goodsRow = JSON::decode($item['goods_array'])}
 						{$goodsRow['name']} &nbsp;&nbsp; {$goodsRow['value']}
 					</td>
-					<td>{$item['real_price']}</td>
+					<td>{echo:intval($item['goods_price'])}</td>
 					<td>{$item['goods_nums']}</td>
 					<td>
 						{if:$item['is_send'] == 0}
@@ -80,10 +80,10 @@
                         {/foreach}
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>配送费用:</td><td>￥{$real_freight}</td>
 					<td>保价费用:</td><td>￥{$insured}</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td>收货人姓名:</td><td><input type="text" class="form-control" name="name" value="{$accept_name}" pattern="required"/></td>
 					<td>电话:</td><td><input type="text" class="form-control" name="telphone" value="{$telphone}" pattern="phone" empty /></td>

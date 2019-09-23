@@ -15,9 +15,9 @@
 
 <div class="content">
 	<div class="alert" style="background-color:#F5F5F5" id="ctrlButtonArea">
-		<button type="button" class="btn btn-info" id="to_pay" onclick="pay({$order_id});">支付</button>
+		<!-- <button type="button" class="btn btn-info" id="to_pay" onclick="pay({$order_id});">支付</button> -->
 		<button type="button" class="btn btn-primary" id="to_deliver" onclick="deliver({$order_id});">发货</button>
-		<button type="button" class="btn btn-warning" id="to_refundment" onclick="refundment({$order_id});">退款</button>
+		<!-- <button type="button" class="btn btn-warning" id="to_refundment" onclick="refundment({$order_id});">退款</button> -->
 		<button type="button" class="btn btn-success" id="to_finish" onclick="complete({$order_id},5)">完成</button>
 		<button type="button" class="btn btn-danger" id="to_cancel" onclick="complete({$order_id},4)">作废</button>
 	</div>
@@ -45,9 +45,8 @@
 
 					<thead>
 						<tr>
-							<th>商品名称</th>
-							<th>商品原价</th>
-							<th>实际价格</th>
+							<th>商品名称</th>							
+							<th>积分价格</th>
 							<th>商品数量</th>
 							<th>小计</th>
 							<th>配送方式</th>
@@ -67,10 +66,9 @@
 									{/foreach}
 								</a>
 							</td>
-							<td>￥{$item['goods_price']}</td>
-							<td>￥{$item['real_price']}</td>
+							<td>{echo:intval($item['goods_price'])}</td>
 							<td>{$item['goods_nums']}</td>
-							<td>￥{echo:$item['real_price'] * $item['goods_nums']}</td>
+							<td>{echo:$item['goods_price'] * $item['goods_nums']}</td>
 							<td>
 								{echo:Order_Class::goodsSendStatus($item['is_send'])}
 								{if:$item['delivery_id']}
@@ -83,7 +81,7 @@
 				</table>
 
 				<div class="row">
-					<div class="col-md-6">
+					<!-- <div class="col-md-6">
 						<div class="box box-success box-solid">
 							<div class="box-header">
 								订单金额明细
@@ -94,58 +92,19 @@
 										<col width="120px" />
 										<col />
 									</colgroup>
-
+					
 									<tbody>
-										<tr>
-											<th>商品总额:</th><td>￥{$payable_amount}</td>
-										</tr>
-										<tr>
-											<th>配送费用:</th><td>￥{$real_freight}</td>
-										</tr>
-										<tr>
-											<th>保价费用:</th><td>￥{$insured}</td>
-										</tr>
-										<tr>
-											<th>税金:</th><td>￥{$taxes}</td>
-										</tr>
-										<tr>
-											<th>优惠总额:</th><td>￥{$promotions}</td>
-										</tr>
-										{if:isset($prop) && $prop}
-										<tr>
-											<th>优惠券:</th><td>
-											{foreach:items=Api::run('getPropListAll',array('id'=>$prop))}
-				                            【{$item['card_name']}】 ￥{$item['value']}
-				                            {/foreach}</td>
-										</tr>
-										{/if}
-										<tr>
-											<th>加价或减价:</th><td>￥{$discount}</td>
-										</tr>
-										<tr>
-											<th>订单总额:</th><td>￥{$order_amount}</td>
-										</tr>
-										<tr>
-											<th>已支付金额:</th><td>
-											{set:$item = Api::run('getAmountRowByOrderId',array('order_id'=>$order_id))}
-											￥{$item['amount']}
-				                            </td>
-										</tr>
-										{set:$commissionFee=plugin::trigger('getCommissionFeeByOrderId',$order_id);}
-										{if:$commissionFee > 0}
-										<tr><th>分销佣金:</th><td><a onclick="art.dialog.open('{url:/plugins/commission_order_user/order_id/$order_id}',{width:'50%',height:'50%'});" title="推介者信息">￥{$commissionFee}</a></td></tr>
-										{/if}
-
+																																						
 										{if:$spend_point > 0}
-				                        <tr>
-				                            <th>已支付积分:</th><td>{$spend_point} 积分</td>
-				                        </tr>
-				                        {/if}
+									                        <tr>
+									                            <th>已支付积分:</th><td>{$spend_point} 积分</td>
+									                        </tr>
+									                        {/if}
 									</tbody>
 								</table>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="col-md-6">
 
@@ -233,6 +192,54 @@
     						{/if}
 						</div>
 					</div>
+
+					<div class="row">
+					<div class="col-md-6">
+						<div class="box box-success box-solid">
+							<div class="box-header">
+								订单信息
+							</div>
+							<div class="box-body">
+								<table class="table form-table">
+									<colgroup>
+										<col width="120px" />
+										<col />
+									</colgroup>
+
+									<tbody>
+										<tr>
+											<th>订单号:</th><td>{$order_no}</td>
+										</tr>
+										<tr>
+											<th>当前状态:</th><td class="red">{echo:order_class::orderStatusText($orderStatus)}</td>
+										</tr>
+										<tr>
+											<th>支付状态:</th><td>{echo:order_class::getOrderPayStatusText($this->orderRow)}</td>
+										</tr>
+										<tr>
+											<th>配送状态:</th><td>{echo:order_class::getOrderDistributionStatusText($this->orderRow)}</td>
+										</tr>
+										<tr>
+											<th>订单类型:</th><td>{echo:order_class::getOrderTypeText($this->orderRow)}</td>
+										</tr>
+										<tr>
+											<th>订单所属:</th>
+											<td>
+												{if:$seller_id}
+				                                {set:$sellerRow = Api::run('getSellerInfo',$seller_id)}
+				                                {$sellerRow['true_name']}
+				                                【{if:$is_checkout == 1}已结算{else:}未结算{/if}】
+				                                {else:}
+				                                平台自营
+				                                {/if}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 				</div>
 
 				<div class="row">
@@ -281,10 +288,7 @@
 										</tr>
 										<tr>
 											<th>支付方式:</th><td>{$payment}</td>
-										</tr>
-										<tr>
-											<th>可得积分:</th><td>{$point}</td>
-										</tr>
+										</tr>										
 									</tbody>
 								</table>
 							</div>
@@ -325,53 +329,7 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-6">
-						<div class="box box-success box-solid">
-							<div class="box-header">
-								订单信息
-							</div>
-							<div class="box-body">
-								<table class="table form-table">
-									<colgroup>
-										<col width="120px" />
-										<col />
-									</colgroup>
-
-									<tbody>
-										<tr>
-											<th>订单号:</th><td>{$order_no}</td>
-										</tr>
-										<tr>
-											<th>当前状态:</th><td class="red">{echo:order_class::orderStatusText($orderStatus)}</td>
-										</tr>
-										<tr>
-											<th>支付状态:</th><td>{echo:order_class::getOrderPayStatusText($this->orderRow)}</td>
-										</tr>
-										<tr>
-											<th>配送状态:</th><td>{echo:order_class::getOrderDistributionStatusText($this->orderRow)}</td>
-										</tr>
-										<tr>
-											<th>订单类型:</th><td>{echo:order_class::getOrderTypeText($this->orderRow)}</td>
-										</tr>
-										<tr>
-											<th>订单所属:</th>
-											<td>
-												{if:$seller_id}
-				                                {set:$sellerRow = Api::run('getSellerInfo',$seller_id)}
-				                                {$sellerRow['true_name']}
-				                                【{if:$is_checkout == 1}已结算{else:}未结算{/if}】
-				                                {else:}
-				                                平台自营
-				                                {/if}
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 
 			<div class="tab-pane" id="tab2">
@@ -392,10 +350,7 @@
 					                    {foreach:items=Api::run('getCollectionDocByOrderId',array('order_id'=>$order_id))}
 										<tr>
 											<th>付款时间：</th><td>{$item['time']}</td>
-										</tr>
-										<tr>
-											<th>金额：</th><td>{$item['amount']}</td>
-										</tr>
+										</tr>										
 										<tr>
 											<th>支付方式：</th><td>{$item['name']}</td>
 										</tr>
@@ -810,6 +765,7 @@ function complete(id,statusVal)
 //退款
 function refundment(id)
 {
+	return;
 	var tempUrl = '{url:/order/order_refundment/id/@id@}';
 	tempUrl     = tempUrl.replace('@id@',id);
 	art.dialog.open(tempUrl,{
@@ -835,6 +791,7 @@ function refundment(id)
 //付款
 function pay(id)
 {
+	return;
 	var tempUrl = '{url:/order/order_collection/id/@id@}';
 	tempUrl     = tempUrl.replace('@id@',id);
 

@@ -35,7 +35,7 @@ class Point
 			$is_success = $this->editPoint($config['user_id'],$config['point']);
 			if($is_success)
 			{
-				if(($point_id = $this->writeLog($config)))
+				if(($point_id = $this->writeLog($config))) 
 				{
 					try {
 					Aisino_class::pushPoint($point_id);
@@ -43,7 +43,7 @@ class Point
 				} else {				
 					//记录日志
 					$logObj = new log('db');
-					$logObj->write('operation',array("用户:".$this->user['username'],"兑换商品，记录日志失败","订单ID：".$config['order_id']));	
+					$logObj->write('operation',array("用户ID:".$config['user_id'],"兑换商品，记录日志失败","订单ID：".$config['order_id']."，积分：".$config['point']));	
 					$this->error = '记录日志失败';
 				}
 			}
@@ -73,6 +73,7 @@ class Point
 		$poinLogObj    = new IModel('point_log');
 		$pointLogArray = array(
 			'user_id' => $config['user_id'],
+			'order_id'=> $config['order_id'],
 			'datetime'=> ITime::getDateTime(),
 			'value'   => $config['point'],
 			'intro'   => $config['log'],
