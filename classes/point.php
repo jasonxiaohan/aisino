@@ -40,7 +40,10 @@ class Point
 					try {
 					Aisino_class::pushPoint($point_id);
 					} catch(Exception $e) {}										
-				} else {					
+				} else {				
+					//记录日志
+					$logObj = new log('db');
+					$logObj->write('operation',array("用户:".$this->user['username'],"兑换商品，记录日志失败","订单ID：".$config['order_id']));	
 					$this->error = '记录日志失败';
 				}
 			}

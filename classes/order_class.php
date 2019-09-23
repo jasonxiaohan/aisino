@@ -152,7 +152,7 @@ class Order_Class
 			}
 
 			//注册用户进行奖励
-			if($orderRow['user_id'])
+			/*if($orderRow['user_id'])
 			{
 				$user_id = $orderRow['user_id'];
 
@@ -195,7 +195,8 @@ class Order_Class
 					$pointObj = new Point();
 					$pointObj->update($pointConfig);
 				}
-			}
+			}*/
+			
 			//插入收款单
 			$collectionDocObj = new IModel('collection_doc');
 			$collectionData   = array(

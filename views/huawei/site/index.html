@@ -50,16 +50,16 @@
 <!-- 商城公告和新闻动态 -->
 
 <!-- 广告位 -->
-<section class="home_focus_show">
+<!-- <section class="home_focus_show">
 	<div class="show_list">{echo:Ad::show("首页焦点图下广告0_291*160(huawei)")}</div>
 	<div class="show_list">{echo:Ad::show("首页焦点图下广告1_291*160(huawei)")}</div>
 	<div class="show_list">{echo:Ad::show("首页焦点图下广告2_291*160(huawei)")}</div>
 	<div class="show_list">{echo:Ad::show("首页焦点图下广告3_291*160(huawei)")}</div>
-</section>
+</section> -->
 <!-- 广告位 -->
 
 <!--热卖商品-->
-<section class="hotsale">
+<!-- <section class="hotsale">
 	<header class="home_layer_title">
 		<h3>热销单品</h3>
 	</header>
@@ -70,13 +70,13 @@
 				<a class="home_pul_box_shadow" href="{url:/site/products/id/$item['id']}">
 					<img src="{url:/pic/thumb/img/$item[img]/w/134/h/134}" alt="{$item['name']}" />
 					<h3 class="pro_title">{$item['name']}</h3>
-					<!-- <del>￥{$item['market_price']}</del> -->
+					<del>￥{$item['market_price']}</del>
 					<p class="pro_price">{$item['point']}积分</p>
 				</a>
 			{/foreach}
 		</div>
 	</div>
-</section>
+</section> -->
 <!--热卖商品-->
 
 <!-- 主页活动section：recommend-推荐商品、group_buy-团购商品、panic_buy限时抢购 -->
@@ -111,71 +111,7 @@
 <!-- 主页活动section：recommend-推荐商品、group_buy-团购商品、panic_buy限时抢购 -->
 
 <!-- 主页活动section：recommend-推荐商品、group_buy-团购商品、panic_buy限时抢购 -->
-<!-- 团购商品 -->
-{set:$tuanitems=Api::run('getRegimentList',5)}
-{if:$tuanitems}
-<section class="home_activity group_buy">
-	<header class="home_layer_title">
-		<h3>团购商品</h3>
-		<nav class="floor_nav">
-		</nav>
-		<a class="more" href="{url:/site/groupon}">更多></a>
-	</header>
-	<div class="act_content">
-		<ul>
-			{foreach:items=$tuanitems}
-			<li>
-				<a href="{url:/site/products/id/$item['goods_id']}">
-					<img src="{url:/pic/thumb/img/$item['img']/w/170/h/170}">
-					<h3 class="pro_title">{$item['title']}</h3>
-					<p class="pro_price">￥{$item['regiment_price']}</p>
-				</a>
-			</li>
-			{/foreach}
-		</ul>
-	</div>
-</section>
-{/if}
-<!-- 团购商品 -->
 
-<!-- 限时抢购 -->
-{set:$panicbuying=Api::run('getPromotionList', 10);}
-{if:$panicbuying}
-<section class="home_activity panic_buy">
-	<header class="home_layer_title">
-		<h3>限时抢购</h3>
-	</header>
-	<!-- 推荐商品的前进和后退，这里只有需要滚动的有 -->
-	<div class="control">
-		<i id="home_panic_left" class="fa fa-angle-left"></i>
-		<i id="home_panic_right" class="fa fa-angle-right"></i>
-	</div>
-	<!-- 推荐商品的前进和后退，这里只有需要滚动的有 -->
-	<div id="home_panic" class="act_content">
-		<ul>
-			{foreach:items=$panicbuying}
-			{set:$free_time = ITime::getDiffSec($item['end_time'])}
-			{set:$countNumsItem[] = $item['p_id'];}
-			<li>
-				<!-- 限时抢购-倒计时 -->
-				<div class="times">
-					<span>倒计时：</span>
-					<em id="cd_hour_{$item['p_id']}">{echo:floor($free_time/3600);}</em> 时
-					<em id='cd_minute_{$item['p_id']}'>{echo:floor(($free_time%3600)/60);}</em> 分
-					<i id='cd_second_{$item['p_id']}'>{echo:$free_time%60;}</i> 秒
-				</div>
-				<!-- 限时抢购-倒计时 -->
-				<a title="{$item['name']}" href="{url:/site/products/id/$item['goods_id']}">
-					<img src="{url:/pic/thumb/img/$item['img']/w/170/h/170}">
-					<h3 class="pro_title">{$item['name']}</h3>
-					<p class="pro_price">￥{$item['award_value']}</p>
-				</a>
-			</li>
-			{/foreach}
-		</ul>
-	</div>
-</section>
-{/if}
 <!-- 限时抢购 -->
 
 <!-- 主页活动section：recommend-推荐商品、group_buy-团购商品、panic_buy限时抢购 -->
@@ -229,12 +165,12 @@
 	<section class="floor_body">
 		<div class="floor_goods">
 			<ul>
-				<li class="floor_show">
+				<!-- <li class="floor_show">
 					<a class="home_pul_box_shadow">
 						{echo:Ad::show("首页分类广告291*346(huawei)", $first['id'])}
 					</a>
-				</li>
-				{foreach:items=Api::run('getCostPointList',array('category_id'=>$first['id']),7)}
+				</li> -->
+				{foreach:items=Api::run('getCostPointList',array('category_id'=>$first['id']),8)}
 				<li>
 					<a class="home_pul_box_shadow" href="{url:/site/products/id/$item['goods_id']}">
 						<img class="floor_goods_img" src="{url:/pic/thumb/img/$item['img']/w/170/h/170}">
@@ -252,9 +188,9 @@
 {/foreach}
 
 <!-- 广告位 -->
-<section class="home_focus_show">
+<!-- <section class="home_focus_show">
 	<div class="banner_wrapper">{echo:Ad::show("首页底部广告1200*120(huewei)")}</div>
-</section>
+</section> -->
 <!-- 广告位 -->
 
 <script>

@@ -301,7 +301,7 @@ class Active
                         'history_point' => $history_point - $orderRow['spend_point']                        
                     );
                     $pointObj = new Point();
-                    if(!$pointObj->update($pointConfig)) {
+                    if(!$pointObj->update($pointConfig)) {  
                     	$dataArray = array(
 							'status'     => 4,
 							'pay_status' =>0,
