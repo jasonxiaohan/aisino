@@ -285,43 +285,36 @@ class Active
 	{
 		switch($orderType)
 		{
-			//团购
-			case "groupon":
-			{
-				$tableModel = new IModel('order as o,order_goods as og');
-				$orderRow   = $tableModel->getObj("o.order_no = '{$orderNo}' and o.id = og.order_id","og.goods_nums,o.active_id");
-				if($orderRow)
-				{
-					$regimentModel = new IModel('regiment');
-					$regimentModel->setData(array('sum_count' => 'sum_count + '.$orderRow['goods_nums']));
-					$regimentModel->update('id = '.$orderRow['active_id'],array('sum_count'));
-				}
-			}
-			break;
-
-			//抢购
-			case "time":
-			{
-
-			}
-			break;
-
             //积分兑换
             case "costpoint":
             {
                 $tableModel = new IModel('order');
-                $orderRow   = $tableModel->getObj("order_no = '{$orderNo}'","spend_point,user_id,order_no");
+                $orderRow   = $tableModel->getObj("order_no = '{$orderNo}'","id,spend_point,user_id,order_no");
                 if($orderRow)
                 {
                     $user_id = $orderRow['user_id'];
                     $pointConfig = array(
                         'user_id' => $user_id,
+                        'order_id' => $orderRow['id'],
                         'point'   => -$orderRow['spend_point'],
                         'log'     => '成功购买订单号：'.$orderRow['order_no'].'中的商品,消耗积分'.$orderRow['spend_point'],
                         'history_point' => $history_point - $orderRow['spend_point']                        
                     );
                     $pointObj = new Point();
-                    $pointObj->update($pointConfig);
+                    if(!$pointObj->update($pointConfig)) {
+                    	$dataArray = array(
+							'status'     => 4,
+							'pay_status' =>0,
+						);
+
+                    	// 回滚订单状态
+                    	$tableModel->setData($dataArray);
+                    	if($tableModel->update("id = ".$orderRow['id'])) {
+                    		IError::show("兑换商品过程中出现异常");
+                    	}
+                    	return true;
+                    }	
+
                 }
             }
             break;

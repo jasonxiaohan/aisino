@@ -46,6 +46,7 @@ class Point
 			}
 			else
 			{
+				// 修改member失败时，回滚订单表
 				$this->error = '积分更新失败';
 			}
 		}
