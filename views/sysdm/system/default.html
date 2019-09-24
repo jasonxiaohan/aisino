@@ -316,7 +316,7 @@
                         <th>订单号</th>
                         <th>收货人</th>
                         <th>订单状态</th>
-                        <th>金额</th>
+                        <th>积分</th>
                         <th>下单时间</th>
                         <th>操作</th>
                     </thead>
@@ -326,7 +326,7 @@
                             <td>{$item['order_no']}</td>
                             <td>{$item['accept_name']}</td>
                             <td>{echo:Order_Class::getOrderPayStatusText($item)}</td>
-                            <td><b class="text-red">￥{$item['order_amount']}</b></td>
+                            <td><b class="text-red">{$item['spend_point']}</b></td>
                             <td>{$item['create_time']}</td>
                             <td>
                                 <a href="{url:/order/order_show/id/$item['oid']}">

@@ -1659,7 +1659,7 @@ return array(
         'query'=>array(
             'name'  =>'order as o',
             'join'  =>'left join delivery as d on o.distribution = d.id left join payment as p on o.pay_type = p.id left join user as u on u.id = o.user_id',
-            'fields'=>'o.id as oid,d.name as dname,p.name as pname,o.order_no,o.accept_name,o.pay_status,o.distribution_status,u.username,o.create_time,o.status,o.order_amount',
+            'fields'=>'o.id as oid,d.name as dname,p.name as pname,o.order_no,o.accept_name,o.pay_status,o.distribution_status,u.username,o.create_time,o.status,o.order_amount,o.spend_point',
             'where' =>'o.status < 3 and if_del = 0',
             'order' =>'o.id desc',
             'limit' =>10
