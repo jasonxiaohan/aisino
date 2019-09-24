@@ -40,19 +40,7 @@
 				<!--活动页面-->
 				{if:isset($activeTemplate)}
 				{include:$activeTemplate}
-				{/if}
-
-				<!--普通正常-->
-				{if:$promo == ''}
-					{if:$group_price}
-					<li>会员价：<em class="price">￥<span id="data_groupPrice">{$group_price}</span></em></li>
-					<li>原售价：￥<del id="data_sellPrice">{$sell_price}</del></li>
-					{else:}
-					<li>销售价：<em class="price">￥<span id="data_sellPrice">{$sell_price}</span></em></li>
-					{/if}
-				{/if}
-
-				<!-- <li>市场价：￥<del id="data_marketPrice">{$market_price}</del></li> -->
+				{/if}			
 
 				<li>
 					库存：现货 <span id="data_storeNums">{$store_nums} </span>
@@ -358,7 +346,7 @@
 							<img src="{url:/pic/thumb/img/$item['img']/w/56/h/56}" alt="{$item['name']}">
 							<div>
 								<p class="goods_title"><span>{$item['name']}</span></p>
-								<p class="goods_sell_price">积分：{$item['point']}</p>
+								<p class="goods_sell_price">{$item['point']}积分</p>
 							</div>
 						</a>
 					</li>

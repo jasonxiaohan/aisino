@@ -19,30 +19,7 @@
 		{if:isset($activeTemplate)}
 		{include:$activeTemplate}
 		{/if}
-		<!--抢购活动,引入 "_products_time"模板-->
-		{if:$promo == 'time' && isset($time)}
-		{include:_products_time}
-		{/if}
-
-		<!--团购活动,引入 "_products_groupon"模板-->
-		{if:$promo == 'groupon' && isset($groupon)}
-		{include:_products_groupon}
-		{/if}
-		{if:$promo == ''}
-			{if:$group_price}
-			<!--当前用户有会员价-->
-			<li>
-				会员价：<em class="price">￥<span id="data_groupPrice">{$group_price}</span></em>　
-				<del class="old_price">￥<span id="data_sellPrice">{$sell_price}</span></del>
-			</li>
-
-			{else:}
-			<!--当前用户普通价格-->
-			<li>
-				销售价：<em class="price">￥<span id="data_sellPrice">{$sell_price}</span></em>
-			</li>
-			{/if}
-		{/if}
+		
 		<li>
 			商品编号：<span class="number" id="data_goodsNo">{echo:$goods_no?$goods_no:$id}</span>
 		</li>
