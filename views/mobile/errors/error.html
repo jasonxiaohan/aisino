@@ -1,18 +1,12 @@
 {set:$msg = IReq::get('message') ? IReq::get('message') : '发生错误'}
 
 <div class="bigweb">
-<section class="prompt_page error">
-	<i class="ico"></i>
-	<article>
-		<strong>{echo:htmlspecialchars($msg,ENT_QUOTES)}</strong><br>
-		您可以：<br>
-		1.请联系您的积分发放方确认积分<br>
-		2.请重新选择可兑换商品<br>
-
-			3.去其他地方逛逛：
-			<a href='javascript:void(0)' onclick='window.history.go(-1);'>返回上一级操作</a> |
-			<a href="{url:}">网站首页</a> |
-			<a href="{url:/ucenter/order}">我的订单</a> 
-	</article>
+<section class="nothing">
+    <i class="fa fa-remove red"></i>
+    <p class="red">{echo:htmlspecialchars($msg,ENT_QUOTES)}</p>
+    <div class="tips">
+        <a href="/ucenter/index">个人中心</a>
+        <a href="/site/index">网站首页</a>
+    </div>
 </section>
 </div>
