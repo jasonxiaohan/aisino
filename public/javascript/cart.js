@@ -4,7 +4,6 @@ __openUpdateStatus = true;
 //购物车数量改动计算
 function cartCount(obj)
 {
-	console.log(1);
 	if(__openUpdateStatus == false)
 	{
 		return false;
@@ -57,11 +56,10 @@ function cartCount(obj)
 			}
 			else
 			{
-				console.log(4);
 				countInput.data('oldNum',countInputVal);
 				refreshCount();
 				//更新小计的价格
-				$('#sum_'+obj.goods_id+'_'+obj.product_id).html(((obj.sell_price) * countInputVal).toFixed(2));
+				$('#sum_'+obj.goods_id+'_'+obj.product_id).html(((parseInt(obj.sell_price)) * countInputVal));
 			}
 		});
 	}
@@ -70,7 +68,6 @@ function cartCount(obj)
 //增加商品数量
 function cart_increase(obj)
 {
-	console.log(2);
 	//库存超量检查
 	var countInput = $('#count_'+obj.goods_id+'_'+obj.product_id);
 	if(parseInt(countInput.val()) + 1 > parseInt(obj.store_nums))
@@ -91,7 +88,6 @@ function cart_increase(obj)
 //减少商品数量
 function cart_reduce(obj)
 {
-	console.log(3);
 	//库存超量检查
 	var countInput = $('#count_'+obj.goods_id+'_'+obj.product_id);
 	if(parseInt(countInput.val()) - 1 <= 0)

@@ -33,7 +33,7 @@
 						{/foreach}
 						{/if}
 					</p>
-					<em class="cart_list_info_price">积分：{$item['sell_price']}</em>
+					<em class="cart_list_info_price">积分：{echo:intval($item['sell_price'])}</em>
 				</div>
 			</div>
 			<del class="del" onclick='javascript:removeCartByJSON(item{$goodsKey});'>删除</del>

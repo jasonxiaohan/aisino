@@ -42,7 +42,7 @@
 						</p>
 						{/if}
 					</td>
-					<td><em>{$item['sell_price']}</em></td>
+					<td><em>{echo:intval($item['sell_price'])}</em></td>
 					<td>
 						<div class="goods_resize">
 							<span class="reduce" onclick='cart_reduce(item{$goodsKey});'>─</span>
