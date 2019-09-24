@@ -25,20 +25,7 @@
 		</li>
 		<li>
 			库存：<span class="number" id="data_storeNums">{$store_nums}</span>
-		</li>
-		<!-- <li class="area_li">
-			至
-			<a class="sel_area" href="javascript:;" name="localArea">所在地区</a>：
-			<span id="deliveInfo"></span>
-			<div class="area_box none">
-				<ul>
-					<li><a data-code="1" href="#J_PostageTableCont"><strong>全部</strong></a></li>
-					{foreach:items=Api::run('getAreasListTop')}
-					<li><a href="javascript:$('.area_box').hide();" name="areaSelectButton" value="{$item['area_id']}">{$item['area_name']}</a></li>
-					{/foreach}
-				</ul>
-			</div>
-		</li> -->
+		</li>	
 		<li>
 			商品重量：<span class="number">{$weight}</span>
 		</li>

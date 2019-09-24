@@ -62,23 +62,7 @@
 
 				{if:$point > 0}
 				<li>送积分：单件送{$point}分</li>
-				{/if}
-
-                <!-- {if:goods_class::isDelivery($type)}
-                				<li>
-                					至
-                					<a class="sel_area blue" href="javascript:;" name="localArea">当前地区</a>：
-                					<span id="deliveInfo"></span>
-                					<div class="area_box">
-                						<ul>
-                							<li><a data-code="1" href="#J_PostageTableCont"><strong>全部</strong></a></li>
-                							{foreach:items=Api::run('getAreasListTop')}
-                							<li><a href="javascript:void(0);" name="areaSelectButton" value="{$item['area_id']}">{$item['area_name']}</a></li>
-                							{/foreach}
-                						</ul>
-                					</div>
-                				</li>
-                				{/if} -->
+				{/if}                
 
 				<!--商家信息 开始-->
 				{if:isset($seller)}
