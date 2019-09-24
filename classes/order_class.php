@@ -780,7 +780,7 @@ class Order_Class
 		//2,订单支付
 		if($orderRow['pay_status'] > 0)
 		{
-			$result[$orderRow['pay_time']] = '订单付款  '.$orderRow['order_amount'];
+			$result[$orderRow['pay_time']] = '订单兑换积分  '.$orderRow['spend_point'];
 		}
 
 		//3,订单配送

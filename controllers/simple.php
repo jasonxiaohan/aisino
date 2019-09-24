@@ -663,15 +663,15 @@ class Simple extends IController
 					}
 				}
 			}
-
+            
 			//促销规则
-			if(isset($goodsResult['promotion']) && $goodsResult['promotion'])
+			/*if(isset($goodsResult['promotion']) && is_array($goodsResult['promotion']))
 			{
 				foreach($goodsResult['promotion'] as $key => $val)
 				{
 					$dataArray['note'] .= join("，",$val)."。";
 				}
-			}
+			}*/
 
 			$dataArray['order_amount'] = $dataArray['order_amount'] <= 0 ? 0 : $dataArray['order_amount'];
 
