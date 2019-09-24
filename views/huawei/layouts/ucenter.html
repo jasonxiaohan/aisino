@@ -180,7 +180,7 @@
 									<a href="{url:/site/products/id/$item['id']}" target="_blank" title="{$item['name']}">
 										<img class="img-lazyload" src="{url:/pic/thumb/img/$item['img']/w/118/h/118}" alt="{$item['name']}">
 										<h3>{$item['name']}</h3>
-										<p class="price">￥ {$item['sell_price']}</p>
+										<p class="price">{echo:intval($item['sell_price'])}积分</p>
 									</a>
 								</li>
 								{/foreach}
