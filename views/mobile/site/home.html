@@ -9,15 +9,7 @@
     <dl>
         <dt>销量：</dt>
         <dd>{echo:statistics::sellCountSeller($sellerRow['id'])} 件</dd>
-    </dl>
-    <dl>
-        <dt>联系电话：</dt>
-        <dd>{$sellerRow['phone']}  {set:plugin::trigger("onServiceButton",$sellerRow['id'])}</dd>
-    </dl>
-    <dl>
-        <dt>所在地：</dt>
-        <dd>{echo:join(' ',area::name($sellerRow['province'],$sellerRow['city'],$sellerRow['area']))} {$sellerRow['address']}</dd>
-    </dl>
+    </dl>    
 </section>
 
 {set:$goodsObj = search_goods::find(array('go.seller_id' => $seller_id),20);$resultData = $goodsObj->find();}
@@ -33,9 +25,8 @@
         <li>
             <a href="{url:/site/products/id/$item[id]}">
                 <i class="photo"><img class="goods_photo" src="{url:/pic/thumb/img/$item[img]/w/200/h/200}" alt="{$item['name']}"></i>
-                <h3 class="name"><strong>{$item['name']}</strong></h3>
-                <del class="old_price">￥{$item['market_price']}</del>
-                <em class="price">￥{$item['sell_price']}</em>
+                <h3 class="name"><strong>{$item['name']}</strong></h3>                
+                <em class="price">{echo:intval($item['sell_price'])}积分</em>
             </a>
         </li>
         {/foreach}

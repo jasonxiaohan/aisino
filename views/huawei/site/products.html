@@ -94,9 +94,7 @@
 
 				<!--商家信息 开始-->
 				{if:isset($seller)}
-				<li>商家：<a class="orange" href="{url:/site/home/id/$seller_id}">{$seller['true_name']}</a></li>
-				<li>联系电话：{$seller['phone']}</li>
-				<li>所在地：{echo:join(' ',area::name($seller['province'],$seller['city'],$seller['area']))}</li>
+				<li>商家：<a class="orange" href="{url:/site/home/id/$seller_id}">{$seller['true_name']}</a></li>				
 				<li>{set:plugin::trigger("onServiceButton",$seller['id'])}</li>
 				{/if}
 				<!--商家信息 结束-->

@@ -69,13 +69,7 @@
 		{set:plugin::trigger("onServiceButton",$seller['id'])}
 		<li>
 			商家名称：<strong class="seller_name"><a href="{url:/site/home/id/$seller_id}">{$seller['true_name']}</a></strong>
-		</li>
-		<li>
-			商家所在地：<span class="seller_area">{echo:join(' ',area::name($seller['province'],$seller['city'],$seller['area']))}</span>
-		</li>
-		<li>
-			联系客服：<a class="seller_tel" href="tel:{$seller['phone']}">{$seller['phone']}</a>
-		</li>
+		</li>	
 		{/if}
 		<li>
 			商品评价：<span class="number">{$comments} 次</span>
