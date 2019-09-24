@@ -545,6 +545,9 @@ class Site extends IController
 		$commentDB->order  = 'c.id desc';
 		$commentDB->page   = $page;
 		$data     = $commentDB->find();
+		foreach($data as $key=>&$val) {
+			$val['username'] = Util::shieldMobile($val['username']);
+		}
 		$pageHtml = $commentDB->getPageBar("javascript:void(0);",'onclick="comment_ajax([page])"');
 
 		echo JSON::encode(array('data' => $data,'pageHtml' => $pageHtml));
@@ -564,6 +567,10 @@ class Site extends IController
 		$orderGoodsDB->page   = $page;
 
 		$data = $orderGoodsDB->find();
+		foreach($data as $key=>&$val) {
+			$val['username'] = Util::shieldMobile($val['username']);
+			$val['goods_price'] = intval($val['goods_price']);
+		}
 		$pageHtml = $orderGoodsDB->getPageBar("javascript:void(0);",'onclick="history_ajax([page])"');
 
 		echo JSON::encode(array('data' => $data,'pageHtml' => $pageHtml));
@@ -583,6 +590,9 @@ class Site extends IController
 		$discussDB->page = $page;
 
 		$data = $discussDB->find();
+		foreach($data as $key=>&$val) {
+			$val['username'] = Util::shieldMobile($val['username']);		
+		}
 		$pageHtml = $discussDB->getPageBar("javascript:void(0);",'onclick="discuss_ajax([page])"');
 
 		echo JSON::encode(array('data' => $data,'pageHtml' => $pageHtml));
@@ -602,6 +612,9 @@ class Site extends IController
 		$referDB->page = $page;
 
 		$data = $referDB->find();
+		foreach($data as $key=>&$val) {
+			$val['username'] = Util::shieldMobile($val['username']);		
+		}
 		$pageHtml = $referDB->getPageBar("javascript:void(0);",'onclick="refer_ajax([page])"');
 
 		echo JSON::encode(array('data' => $data,'pageHtml' => $pageHtml));

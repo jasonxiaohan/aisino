@@ -85,6 +85,11 @@ function webroot(path)
 	return path.indexOf('http') == 0 ? path : _webRoot+path;
 }
 
+function shieldUserName(name)
+{
+	return "186****2576";
+}
+
 /**
  * @brief 商品筛选
  * @param object {"type":radio,none,checkbox,"callback":回调函数,"submit":提交函数,"seller_id":商户ID,"is_products":0,1是否包括货品数据,"mode":检索模式simple,normal}

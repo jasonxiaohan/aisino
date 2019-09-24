@@ -2,6 +2,15 @@
 __GOODSID = "";//商品ID
 
 /**
+ * 将手机号中间4位隐藏起来
+ * @param  {[type]} name [description]
+ * @return {[type]}      [description]
+ */
+function shieldUserName(name) {
+	 console.log("186****2576");
+}
+
+/**
  * @brief 商品类库
  * @param int goods_id 商品ID参数
  * @param int user_id 用户ID参数
