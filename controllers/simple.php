@@ -104,10 +104,19 @@ class Simple extends IController
 		$type      = IFilter::act(IReq::get('type'));
         $sum_point = IFilter::act(IReq::get('sum_point'),'int');
 
+        if($this->user['user_id'] == null) {
+            $result = array(
+                'isError' => true,
+                'message' => '请先登录账号',
+            );
+            echo JSON::encode($result);
+            return;
+        }
+
         // 检查账户积分是否足够
         $user_id = ($this->user['user_id'] == null) ? 0 : $this->user['user_id'];
         $memberObj = new IModel('member');
-        $memberRow = $memberObj->getObj("user_id = ".$user_id,"point");
+        $memberRow = $memberObj->getObj("user_id = ".$user_id,"point");        
 
         $costPointObj = new IModel('cost_point');
         $costPointRow = $costPointObj->getObj("goods_id = ".$goods_id,"point");
