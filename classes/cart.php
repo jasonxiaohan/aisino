@@ -139,14 +139,34 @@ class Cart
 			return false;
 		}
 		else
-		{
-			$cartInfo = $this->getUpdateCartData($cartInfo,$gid,$num,$type);
+		{			
 			if($cartInfo === false)
 			{
 				return false;
 			}
 			else
 			{
+				// 检查账户积分是否足够
+		        $user_id = IWeb::$app->getController()->user['user_id'];
+		        $memberObj = new IModel('member');
+		        $memberRow = $memberObj->getObj("user_id = ".$user_id,"point");        
+
+				$cartInfo = $this->getUpdateCartData($cartInfo,$gid,$num,$type);
+				// 检查加入购物车商品的积分是否大于账户积分						
+				if($cartInfo['goods']) {
+					$goodsIds = join(",", array_keys($cartInfo['goods']));
+					$costPointObj = new IModel('cost_point');
+					$costPointRows = $costPointObj->query("goods_id in({$goodsIds})","goods_id,point");	
+					// 当前购物车积分
+					$cartPoint = 0;
+					foreach ($costPointRows as $val) {
+						$cartPoint += intval($val['point'] * $cartInfo['goods'][$val['goods_id']]);
+					}		
+					if($cartPoint > $memberRow['point']) {
+						$this->error = '用户积分不足';
+						return false;
+					}
+				}
 				return $this->setMyCart($cartInfo);
 			}
 		}
