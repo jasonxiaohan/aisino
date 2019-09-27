@@ -11,7 +11,7 @@
 					{if:$brandRow['url']}<a class="barnd_web" href="{$brandRow['url']}"><i class="fa fa-home"></i></a>{/if}
 				</h2>
 				<div class="barnd_info">
-					<img class="brand_logo" src="{url:/pic/thumb/img/$brandRow[logo]/w/215/h/120}">
+					{if:$brandRow['logo']}<img class="brand_logo" src="{url:/pic/thumb/img/$brandRow[logo]/w/215/h/120}">{/if}
 					{$brandRow['description']}
 				</div>
 			</section>
