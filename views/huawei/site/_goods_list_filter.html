@@ -34,12 +34,12 @@
 			<a class="current" href="{echo:search_goods::searchUrl(array('min_price','max_price'),'')}">不限</a>
 			{foreach:items=search_goods::$priceSearch}
 			{set:$priceZone = explode('-',$item)}
-			<a href="{echo:search_goods::searchUrl(array('min_price','max_price'),array($priceZone[0],$priceZone[1]))}" id="{$item}">{$item}</a>
+			<a href="{echo:search_goods::searchUrl(array('min_price','max_price'),array($item,$item))}" id="{$item}">{$item}</a>
 			{/foreach}
-			<p class="condition">
+			<!-- <p class="condition">
 				<input type="text" name="min_price"> 至 <input type="text" name="max_price"> 分
 				<button onclick="priceLink();">确定</button>
-			</p>
+			</p> -->
 		</dd>
 	</dl>
 	<!--商品价格-->
@@ -99,7 +99,7 @@ $(function(){
 
 	//价格模块高亮和预填充
 	{if:IReq::get('min_price') || IReq::get('max_price')}
-	{set:$priceId = IFilter::act(IReq::get('min_price'))."-".IFilter::act(IReq::get('max_price'))}
+	{set:$priceId = IFilter::act(IReq::get('min_price'))}
 	$('#price_dd>*').removeClass('current');
 	$('#{$priceId}').addClass('current');
 	$('input[name="min_price"]').val("{echo:IFilter::act(IReq::get('min_price'))}");

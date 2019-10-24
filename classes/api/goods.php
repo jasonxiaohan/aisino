@@ -47,7 +47,7 @@ class APIGoods
 		$childList = $catDB->query("parent_id = '{$catId}'","*","sort asc");
 		if(!$childList && $catRow = $catDB->getObj("id = '{$catId}'"))
 		{
-			$childList = $catDB->query('parent_id = '.$catRow['parent_id'],"*","sort asc");
+			// $childList = $catDB->query('parent_id = '.$catRow['parent_id'],"*","sort asc");
 		}
 		return $childList;
 	}

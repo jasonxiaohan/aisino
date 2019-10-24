@@ -9,7 +9,7 @@
 			<div class="article_list">
 				<ul>
 					{foreach:items = $this->helpQuery->find()}
-					<li><time>{echo:date('Y-m-d H:i:s',$item['dateline'])}</time><a href="{url:/site/help/id/$item['id']}">{$item['name']}</a></li>
+					<li><a href="{url:/site/help/id/$item['id']}">{$item['name']}</a></li>
 					{/foreach}
 				</ul>
 				{$this->helpQuery->getPageBar();}
