@@ -13,7 +13,7 @@
 					{foreach:items=Api::run('getBrandListWhere',array('#id#',$id),100)}
 					<li>
 						<a href="{url:/site/brand_zone/id/$item['id']}">
-							<img src="{url:/pic/thumb/img/$item[logo]/w/208/h/120}">
+							<!-- <img src="{url:/pic/thumb/img/$item[logo]/w/208/h/120}"> -->
 							<strong>{$item['name']}</strong>
 						</a>
 					</li>
@@ -27,7 +27,7 @@
 					{foreach:items=Api::run('getBrandList',40)}
 					<li>
 						<a href="{url:/site/brand_zone/id/$item['id']}">
-							<img src="{url:/pic/thumb/img/$item[logo]/w/208/h/120}">
+							<!-- <img src="{url:/pic/thumb/img/$item[logo]/w/208/h/120}"> -->
 							<strong>{$item['name']}</strong>
 						</a>
 					</li>
