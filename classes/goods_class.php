@@ -806,7 +806,8 @@ class goods_class
 		$result   = array();
 		if($perPrice > 0)
 		{
-			$result    = array('0-'.$perPrice);
+			$result = ['500', '1000', '1650', '2200','3200'];
+			/*$result    = array('0-'.$perPrice);
 			$stepPrice = $perPrice;
 			for($addPrice = $stepPrice+1; $addPrice < $goodsPrice['max'];)
 			{
@@ -820,7 +821,7 @@ class goods_class
 				$addPrice  = $stepPrice + 1;
 			}
 			//置换max价格
-			$result[count($result)-1] = str_replace("-".$stepPrice,"-".ceil($goodsPrice['max']),$result[count($result)-1]);
+			$result[count($result)-1] = str_replace("-".$stepPrice,"-".ceil($goodsPrice['max']),$result[count($result)-1]);*/
 		}
 		return $result;
 	}
